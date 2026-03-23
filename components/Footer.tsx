@@ -1,0 +1,68 @@
+import Link from "next/link";
+import Image from "next/image";
+
+export default function Footer() {
+  return (
+    <footer className="bg-[#0f0f0f] border-t border-white/10 mt-auto">
+      <div className="max-w-7xl mx-auto px-5 py-14 grid grid-cols-1 sm:grid-cols-3 gap-10">
+        {/* Brand */}
+        <div className="flex flex-col gap-4">
+          <Image
+            src="/logo.png"
+            alt="SAE Academy"
+            width={56}
+            height={56}
+            className="w-12 h-12 object-contain"
+          />
+          <p className="text-gray-500 text-xs leading-relaxed max-w-[220px]">
+            Developing the next generation of athletes and artists in New Brunswick through daily, high-level programming.
+          </p>
+        </div>
+
+        {/* Quick Links */}
+        <div>
+          <p className="text-[#C9A84C] text-[10px] font-bold uppercase tracking-[0.3em] mb-5">
+            Quick Links
+          </p>
+          <ul className="flex flex-col gap-3">
+            {[
+              { href: "/", label: "Home" },
+              { href: "/sports", label: "Programs" },
+              { href: "/schools", label: "Participating Schools" },
+              { href: "/faq", label: "FAQ" },
+            ].map((l) => (
+              <li key={l.href}>
+                <Link
+                  href={l.href}
+                  className="text-gray-500 text-xs font-semibold uppercase tracking-wider hover:text-white transition-colors"
+                >
+                  {l.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        {/* Contact */}
+        <div>
+          <p className="text-[#C9A84C] text-[10px] font-bold uppercase tracking-[0.3em] mb-5">
+            Contact
+          </p>
+          <p className="text-gray-600 text-xs mb-2 uppercase tracking-wider">For inquiries:</p>
+          <a
+            href="mailto:info@academiesae.com"
+            className="text-white text-sm font-bold hover:text-[#C9A84C] transition-colors break-all"
+          >
+            info@academiesae.com
+          </a>
+          <p className="text-gray-700 text-[10px] mt-8 uppercase tracking-wider">
+            &copy; {new Date().getFullYear()} Sports, Arts, Education Academy
+          </p>
+        </div>
+      </div>
+
+      {/* Bottom bar */}
+      <div className="h-[3px] bg-gradient-to-r from-[#C8102E] via-[#C9A84C] to-[#C8102E]" />
+    </footer>
+  );
+}
