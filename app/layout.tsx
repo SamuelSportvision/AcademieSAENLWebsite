@@ -15,6 +15,10 @@ export const metadata: Metadata = {
   title: "Sports, Arts, Education Academy",
   description:
     "A Sports Studies program in New Brunswick providing flexible scheduling, qualified coaches, and daily training for student-athletes and artists.",
+  icons: {
+    icon: "/logo-transparent.png",
+    apple: "/logo-transparent.png",
+  },
   openGraph: {
     title: "Sports, Arts, Education Academy",
     description:

@@ -8,14 +8,14 @@ export default function Footer() {
         {/* Brand */}
         <div className="flex flex-col gap-4">
           <Image
-            src="/logo.png"
+            src="/logo-dark.png"
             alt="SAE Academy"
-            width={56}
-            height={56}
-            className="w-12 h-12 object-contain"
+            width={80}
+            height={80}
+            className="w-16 h-16 object-contain rounded-full"
           />
           <p className="text-gray-500 text-xs leading-relaxed max-w-[220px]">
-            Developing the next generation of athletes and artists in New Brunswick through daily, high-level programming.
+            Developing the next generation of athletes and artists in Newfoundland through daily, high-level programming.
           </p>
         </div>
 

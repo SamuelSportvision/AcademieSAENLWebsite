@@ -27,7 +27,7 @@ export default function HomePage() {
 
         <div className="relative z-10 w-full max-w-7xl mx-auto px-5 pb-16 pt-32">
           <p className="text-[#C9A84C] text-xs font-bold uppercase tracking-[0.35em] mb-5">
-            Newfoundland · Sports Studies Program
+            Newfoundland Sport Education Program
           </p>
           <h1 className="font-black uppercase text-white leading-none mb-6">
             <span className="block text-[clamp(3rem,10vw,7rem)]">Do More.</span>
@@ -142,74 +142,90 @@ export default function HomePage() {
       {/* ── PROGRAMS ── photo-backed cards */}
       <section className="bg-[#0f0f0f] py-24 px-5">
         <div className="max-w-7xl mx-auto">
-          <div className="flex items-end justify-between mb-12 flex-wrap gap-4">
-            <div>
-              <p className="text-[#C9A84C] text-xs font-bold uppercase tracking-[0.3em] mb-3">
-                Our Programs
-              </p>
-              <h2 className="font-black text-4xl sm:text-5xl uppercase text-white leading-tight">
-                Choose Your<br />Discipline
-              </h2>
-            </div>
+          {/* Mobile: just heading + CTA button */}
+          <div className="sm:hidden text-center">
+            <p className="text-[#C9A84C] text-xs font-bold uppercase tracking-[0.3em] mb-3">
+              Our Programs
+            </p>
+            <h2 className="font-black text-4xl uppercase text-white leading-tight mb-8">
+              Choose Your<br />Discipline
+            </h2>
             <Link
               href="/sports"
-              className="text-sm font-bold uppercase tracking-widest text-gray-400 hover:text-[#C9A84C] transition-colors border-b border-gray-600 hover:border-[#C9A84C] pb-1"
+              className="inline-block bg-[#C9A84C] text-black font-black text-sm uppercase tracking-widest px-8 py-4 hover:bg-yellow-400 transition-colors"
             >
               View All Programs
             </Link>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            {sports.map((sport, i) => (
+          {/* Desktop: heading + card grid */}
+          <div className="hidden sm:block">
+            <div className="flex items-end justify-between mb-12 flex-wrap gap-4">
+              <div>
+                <p className="text-[#C9A84C] text-xs font-bold uppercase tracking-[0.3em] mb-3">
+                  Our Programs
+                </p>
+                <h2 className="font-black text-4xl sm:text-5xl uppercase text-white leading-tight">
+                  Choose Your<br />Discipline
+                </h2>
+              </div>
               <Link
-                key={sport.slug}
-                href={`/sports/${sport.slug}`}
-                className="group relative overflow-hidden min-h-[280px] flex flex-col justify-end"
+                href="/sports"
+                className="text-sm font-bold uppercase tracking-widest text-gray-400 hover:text-[#C9A84C] transition-colors border-b border-gray-600 hover:border-[#C9A84C] pb-1"
               >
-                {/* Background — photo or color block */}
-                {sport.image ? (
-                  <>
-                    <Image
-                      src={sport.image}
-                      alt={sport.name}
-                      fill
-                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                      className="object-cover object-center transition-transform duration-500 group-hover:scale-105"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
-                  </>
-                ) : (
-                  <div
-                    className="absolute inset-0"
-                    style={{
-                      background: `linear-gradient(135deg, #1a1a1a 60%, #C9A84C22)`,
-                    }}
-                  />
-                )}
-
-                {/* Accent top bar */}
-                <div
-                  className="absolute top-0 left-0 w-full h-[3px]"
-                  style={{ backgroundColor: "#C9A84C" }}
-                />
-
-                {/* Content */}
-                <div className="relative z-10 p-5">
-                  <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest block mb-2">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-                  <h3 className="font-black text-2xl uppercase text-white leading-tight group-hover:text-[#C9A84C] transition-colors">
-                    {sport.name}
-                  </h3>
-                  {sport.partner && (
-                    <p className="text-gray-400 text-xs font-medium mt-1">{sport.partner}</p>
-                  )}
-                  <p className="text-[#C9A84C] text-xs font-bold uppercase tracking-widest mt-3 opacity-0 group-hover:opacity-100 transition-opacity">
-                    Register →
-                  </p>
-                </div>
+                View All Programs
               </Link>
-            ))}
+            </div>
+
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+              {sports.map((sport, i) => (
+                <Link
+                  key={sport.slug}
+                  href={`/sports/${sport.slug}`}
+                  className="group relative overflow-hidden min-h-[280px] flex flex-col justify-end"
+                >
+                  {sport.image ? (
+                    <>
+                      <Image
+                        src={sport.image}
+                        alt={sport.name}
+                        fill
+                        sizes="(max-width: 1024px) 50vw, 25vw"
+                        className="object-cover object-center transition-transform duration-500 group-hover:scale-105"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
+                    </>
+                  ) : (
+                    <div
+                      className="absolute inset-0"
+                      style={{
+                        background: `linear-gradient(135deg, #1a1a1a 60%, #C9A84C22)`,
+                      }}
+                    />
+                  )}
+
+                  <div
+                    className="absolute top-0 left-0 w-full h-[3px]"
+                    style={{ backgroundColor: "#C9A84C" }}
+                  />
+
+                  <div className="relative z-10 p-5">
+                    <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest block mb-2">
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+                    <h3 className="font-black text-2xl uppercase text-white leading-tight group-hover:text-[#C9A84C] transition-colors">
+                      {sport.name}
+                    </h3>
+                    {sport.partner && (
+                      <p className="text-gray-400 text-xs font-medium mt-1">{sport.partner}</p>
+                    )}
+                    <p className="text-[#C9A84C] text-xs font-bold uppercase tracking-widest mt-3 opacity-0 group-hover:opacity-100 transition-opacity">
+                      Register →
+                    </p>
+                  </div>
+                </Link>
+              ))}
+            </div>
           </div>
         </div>
       </section>
@@ -298,7 +314,7 @@ export default function HomePage() {
                 Partner Schools
               </p>
               <h2 className="font-black text-4xl sm:text-5xl uppercase text-white leading-tight">
-                Your School<br />Is On the List
+                Here Is Our<br />Partner Schools
               </h2>
             </div>
             <Link

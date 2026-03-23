@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 
 const links = [
@@ -24,13 +25,18 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // Reset scroll state on route change (e.g. navigating to a new page)
   useEffect(() => {
     setScrolled(window.scrollY > 40);
     setOpen(false);
   }, [pathname]);
 
+  useEffect(() => {
+    document.body.style.overflow = open ? "hidden" : "";
+    return () => { document.body.style.overflow = ""; };
+  }, [open]);
+
   return (
+    <>
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
@@ -41,7 +47,14 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-5 h-[68px] flex items-center justify-between gap-4">
 
         {/* Logo — far left */}
-        <Link href="/" className="flex items-center flex-shrink-0" onClick={() => setOpen(false)}>
+        <Link href="/" className="flex items-center gap-3 flex-shrink-0" onClick={() => setOpen(false)}>
+          <Image
+            src="/logo-dark.png"
+            alt="SAE Academy"
+            width={40}
+            height={40}
+            className="w-9 h-9 object-contain rounded-full"
+          />
           <div>
             <span className="block font-black text-white text-sm tracking-wide uppercase leading-none">
               SAE Academy
@@ -97,32 +110,66 @@ export default function Navbar() {
         </div>
       </div>
 
-      {/* Mobile dropdown */}
+    </header>
+
+      {/* Mobile full-screen overlay menu */}
       {open && (
-        <div className="md:hidden bg-black/90 backdrop-blur-md border-t border-white/10 px-5 py-5 flex flex-col gap-1">
-          {links.map((l) => (
-            <Link
-              key={l.href}
-              href={l.href}
-              onClick={() => setOpen(false)}
-              className={`text-sm font-bold uppercase tracking-widest py-3 border-b border-white/10 ${
-                pathname === l.href ? "text-[#C9A84C]" : "text-gray-300"
-              }`}
-            >
-              {l.label}
+        <div
+          className="fixed inset-0 z-[60] md:hidden flex flex-col bg-black"
+          onClick={() => setOpen(false)}
+        >
+          {/* Close button row */}
+          <div className="flex items-center justify-between px-5 h-[68px] flex-shrink-0">
+            <Link href="/" className="flex items-center" onClick={() => setOpen(false)}>
+              <div>
+                <span className="block font-black text-white text-sm tracking-wide uppercase leading-none">
+                  SAE Academy
+                </span>
+                <span className="block text-[10px] text-[#C9A84C] tracking-[0.2em] uppercase font-medium mt-0.5">
+                  Sports · Arts · Education
+                </span>
+              </div>
             </Link>
-          ))}
-          <Link
-            href="https://go.teamsnap.com/forms/518037"
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={() => setOpen(false)}
-            className="mt-4 bg-[#C9A84C] text-black text-center font-black uppercase tracking-wider px-4 py-3 text-sm rounded-full"
+            <button
+              className="text-white p-1.5 focus:outline-none"
+              aria-label="Close menu"
+              onClick={() => setOpen(false)}
+            >
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+          </div>
+
+          {/* Nav links */}
+          <nav
+            className="flex-1 overflow-y-auto px-5 pt-8 flex flex-col gap-1"
+            onClick={(e) => e.stopPropagation()}
           >
-            Register Now
-          </Link>
+            {links.map((l) => (
+              <Link
+                key={l.href}
+                href={l.href}
+                onClick={() => setOpen(false)}
+                className={`text-sm font-bold uppercase tracking-widest py-4 border-b border-white/10 ${
+                  pathname === l.href ? "text-[#C9A84C]" : "text-gray-300"
+                }`}
+              >
+                {l.label}
+              </Link>
+            ))}
+            <Link
+              href="https://go.teamsnap.com/forms/518037"
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => setOpen(false)}
+              className="mt-8 bg-[#C9A84C] text-black text-center font-black uppercase tracking-wider px-4 py-4 text-sm rounded-full"
+            >
+              Register Now
+            </Link>
+          </nav>
         </div>
       )}
-    </header>
+    </>
   );
 }

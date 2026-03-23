@@ -120,7 +120,7 @@ export const sports: Sport[] = [
       "Flexible academic programming",
     ],
     accentColor: "#EF4444",
-    image: null,
+    image: "/images/boxing-card.png",
   },
   {
     slug: "dance",
