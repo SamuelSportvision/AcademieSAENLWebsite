@@ -49,11 +49,11 @@ export default function Navbar() {
         {/* Logo — far left */}
         <Link href="/" className="flex items-center gap-3 flex-shrink-0" onClick={() => setOpen(false)}>
           <Image
-            src="/logo-dark.png"
+            src="/logo-dark-clean.png"
             alt="SAE Academy"
             width={40}
             height={40}
-            className="w-9 h-9 object-contain rounded-full"
+            className="w-10 h-10 object-contain"
           />
           <div>
             <span className="block font-black text-white text-sm tracking-wide uppercase leading-none">
@@ -95,7 +95,7 @@ export default function Navbar() {
 
           {/* Mobile hamburger */}
           <button
-            className="md:hidden text-white p-1.5 focus:outline-none"
+            className="md:hidden relative z-[70] text-white p-3 -mr-2 focus:outline-none"
             aria-label="Toggle menu"
             onClick={() => setOpen(!open)}
           >
@@ -118,28 +118,8 @@ export default function Navbar() {
           className="fixed inset-0 z-[60] md:hidden flex flex-col bg-black"
           onClick={() => setOpen(false)}
         >
-          {/* Close button row */}
-          <div className="flex items-center justify-between px-5 h-[68px] flex-shrink-0">
-            <Link href="/" className="flex items-center" onClick={() => setOpen(false)}>
-              <div>
-                <span className="block font-black text-white text-sm tracking-wide uppercase leading-none">
-                  SAE Academy
-                </span>
-                <span className="block text-[10px] text-[#C9A84C] tracking-[0.2em] uppercase font-medium mt-0.5">
-                  Sports · Arts · Education
-                </span>
-              </div>
-            </Link>
-            <button
-              className="text-white p-1.5 focus:outline-none"
-              aria-label="Close menu"
-              onClick={() => setOpen(false)}
-            >
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-              </svg>
-            </button>
-          </div>
+          {/* Spacer matching the header height */}
+          <div className="h-[68px] flex-shrink-0" />
 
           {/* Nav links */}
           <nav
