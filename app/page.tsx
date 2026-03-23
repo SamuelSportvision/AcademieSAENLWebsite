@@ -67,7 +67,7 @@ export default function HomePage() {
               <span className="font-black text-2xl sm:text-3xl text-black uppercase">
                 {stat.value}
               </span>
-              <span className="text-[10px] sm:text-xs font-bold uppercase tracking-[0.2em] text-black/60">
+              <span className="text-[10px] sm:text-xs font-bold uppercase tracking-[0.2em] text-black/60 text-center">
                 {stat.label}
               </span>
             </div>
