@@ -10,31 +10,19 @@ export const faqs: FaqItem[] = [
     category: "General",
     question: "What is the Sports, Arts, Education Academy?",
     answer:
-      "Sports, Arts, Education Academy (SAE Academy) is a Sports Studies program based in New Brunswick that combines daily athletic or artistic training with a flexible academic schedule. We partner with established local sports organizations and schools to give student-athletes and artists the time, facilities, and coaching they need to develop at a high level.",
-  },
-  {
-    category: "General",
-    question: "Who is the program designed for?",
-    answer:
-      "The program is designed for school-aged athletes and artists who want to pursue their sport or art on a daily basis without sacrificing their education. Whether you play hockey, dance, box, or play soccer, if you are passionate about developing your skills, this program is for you.",
+      "Sports, Arts, Education Academy (SAE Academy) is a Sports Studies program that started in New Brunswick that combines daily athletic or artistic training with a flexible academic schedule. We partner with established local sports organizations and schools to give student-athletes and artists the time, facilities, and coaching they need to develop at a high level.",
   },
   {
     category: "General",
     question: "Which schools are part of the program?",
     answer:
-      "We currently work with 12 partner schools in the St. John's / Newfoundland area, including Holy Trinity Elementary, St. Francis of Assisi, Mary Queen of Peace, Paradise Intermediate, and more. See our full list on the Schools page.",
+      "We currently work with 12 partner schools in the St. John's / Newfoundland area, including Holy Trinity Elementary, St. Francis of Assisi, Mary Queen of Peace, Paradise Intermediate, and more. See our full list on the [Schools page](/schools).",
   },
   {
     category: "General",
     question: "What sports and disciplines are available?",
     answer:
       "We currently offer programming in Hockey, Cheerleading, Volleyball, Baseball, Basketball, Boxing, Dance, and Soccer. Each discipline is supported by a partner organization and qualified coaches.",
-  },
-  {
-    category: "General",
-    question: "What makes this program different from a regular after-school program?",
-    answer:
-      "SAE Academy provides a fully integrated experience — athletes train daily during school hours on a flexible schedule, rather than just after school. This allows for more training volume, better recovery, and proper long-term athletic development without compromising education.",
   },
   // Registration
   {

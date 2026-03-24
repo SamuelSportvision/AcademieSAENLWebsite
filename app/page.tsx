@@ -292,13 +292,13 @@ export default function HomePage() {
               See All Programs
             </Link>
           </div>
-          {/* Photo */}
-          <div className="relative min-h-[400px] lg:min-h-[520px] order-1 lg:order-2">
+          {/* Photo — hidden on mobile to reduce scroll length */}
+          <div className="relative hidden lg:block min-h-[520px] order-1 lg:order-2">
             <Image
               src="/images/hockey-coach.jpg"
               alt="SAE Academy hockey coach"
               fill
-              sizes="(max-width: 1024px) 100vw, 50vw"
+              sizes="50vw"
               className="object-cover object-center"
             />
           </div>

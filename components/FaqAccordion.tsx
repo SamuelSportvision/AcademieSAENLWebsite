@@ -1,10 +1,27 @@
 "use client";
 
-import { useState } from "react";
+import { useState, type ReactNode } from "react";
+import Link from "next/link";
 import type { FaqItem } from "@/data/faq";
 
 interface Props {
   items: FaqItem[];
+}
+
+function renderWithLinks(text: string): ReactNode[] {
+  const parts = text.split(/(\[[^\]]+\]\([^)]+\))/g);
+  return parts.map((part, i) => {
+    const match = part.match(/^\[([^\]]+)\]\(([^)]+)\)$/);
+    if (match) {
+      const [, label, href] = match;
+      return (
+        <Link key={i} href={href} className="text-[#C9A84C] underline underline-offset-2 hover:text-yellow-400 transition-colors">
+          {label}
+        </Link>
+      );
+    }
+    return part;
+  });
 }
 
 export default function FaqAccordion({ items }: Props) {
@@ -37,7 +54,7 @@ export default function FaqAccordion({ items }: Props) {
                 <div className="border-t border-white/10 pt-4">
                   <div className="text-gray-400 text-sm leading-relaxed flex flex-col gap-3">
                     {item.answer.split("\n\n").map((paragraph, idx) => (
-                      <p key={idx}>{paragraph}</p>
+                      <p key={idx}>{renderWithLinks(paragraph)}</p>
                     ))}
                   </div>
                 </div>

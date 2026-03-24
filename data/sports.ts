@@ -102,7 +102,7 @@ export const sports: Sport[] = [
       "Flexible school schedule for athletes",
     ],
     accentColor: "#F97316",
-    image: null,
+    image: "/images/basketball.jpg",
   },
   {
     slug: "boxing",
@@ -138,7 +138,7 @@ export const sports: Sport[] = [
       "Flexible schedule designed for student-artists",
     ],
     accentColor: "#A855F7",
-    image: null,
+    image: "/images/dance.jpg",
   },
   {
     slug: "soccer",
