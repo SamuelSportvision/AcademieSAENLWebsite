@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { sports } from "@/data/sports";
 import { schools } from "@/data/schools";
+import ContactModal from "@/components/ContactModal";
 
 export default function HomePage() {
   const featuredSchools = schools.slice(0, 6);
@@ -258,12 +259,10 @@ export default function HomePage() {
             >
               Register on TeamSnap
             </Link>
-            <a
-              href="mailto:info@academiesae.com"
+            <ContactModal
+              label="Contact Us"
               className="border-2 border-white text-white font-black text-sm uppercase tracking-widest px-8 py-4 hover:bg-white hover:text-[#C8102E] transition-colors text-center"
-            >
-              Contact Us
-            </a>
+            />
           </div>
         </div>
       </section>
