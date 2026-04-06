@@ -433,12 +433,10 @@ export default function HomePage() {
             >
               View FAQ
             </Link>
-            <a
-              href="mailto:info@academiesae.com"
-              className="border border-white/20 text-gray-300 font-bold text-sm uppercase tracking-wider px-8 py-4 hover:border-white hover:text-white transition-colors text-center"
-            >
-              info@academiesae.com
-            </a>
+            <ContactModal
+              label="Contact Us"
+              className="border-2 border-white text-white font-black text-sm uppercase tracking-widest px-8 py-4 hover:bg-white hover:text-[#C8102E] transition-colors text-center"
+            />
           </div>
         </div>
       </section>
