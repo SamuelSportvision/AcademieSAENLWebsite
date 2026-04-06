@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 
 async function getEvents(): Promise<ScheduleEvent[]> {
   const isConfigured =
-    process.env.NEXT_PUBLIC_SUPABASE_URL &&
+    process.env.SUPABASE_URL &&
     process.env.SUPABASE_SERVICE_ROLE_KEY;
 
   if (!isConfigured) return [];
