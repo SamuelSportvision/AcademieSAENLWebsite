@@ -53,17 +53,11 @@ export async function POST(request: NextRequest) {
           <td style="padding:32px 36px 24px;border-bottom:1px solid #2a2a2a;">
             <table width="100%" cellpadding="0" cellspacing="0">
               <tr>
-                <td>
-                  <img src="https://academiesaenl.com/logo-dark.png"
-                       alt="SAE Academy"
-                       width="52" height="52"
-                       style="width:52px;height:52px;border-radius:50%;object-fit:cover;display:block;">
-                </td>
-                <td style="padding-left:16px;vertical-align:middle;">
-                  <p style="margin:0;font-size:16px;font-weight:900;color:#ffffff;text-transform:uppercase;letter-spacing:2px;line-height:1.2;">
+                <td style="vertical-align:middle;">
+                  <p style="margin:0;font-size:18px;font-weight:900;color:#ffffff;text-transform:uppercase;letter-spacing:2px;line-height:1.2;">
                     SAE Academy
                   </p>
-                  <p style="margin:3px 0 0;font-size:10px;color:#C9A84C;text-transform:uppercase;letter-spacing:3px;">
+                  <p style="margin:4px 0 0;font-size:10px;color:#C9A84C;text-transform:uppercase;letter-spacing:3px;">
                     Sports · Arts · Education
                   </p>
                 </td>
