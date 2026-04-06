@@ -122,7 +122,7 @@ export default function HomePage() {
               Mission
             </h2>
             <p className="text-red-100 text-base leading-relaxed max-w-md">
-              To create an environment that supports high-level academic and athletic development — giving athletes and artists flexible scheduling, proper facilities, and highly qualified coaches to succeed in both their sport and their studies.
+              To create an environment that supports high-level athletic and artistic development — giving athletes and artists proper facilities, and highly qualified coaches to succeed in both their sport and their studies.
             </p>
           </div>
         </div>
