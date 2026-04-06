@@ -1,8 +1,9 @@
 "use client";
 
-import { useRouter, usePathname } from "next/navigation";
-import { createBrowserClient } from "@/lib/supabase/client";
+import { useTransition } from "react";
+import { usePathname } from "next/navigation";
 import Link from "next/link";
+import { signOut } from "./actions";
 
 const adminNav = [
   { href: "/admin/schedule", label: "Schedule" },
@@ -13,17 +14,13 @@ export default function AdminLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const router = useRouter();
   const pathname = usePathname();
-  const supabase = createBrowserClient();
+  const [pending, startTransition] = useTransition();
 
-  async function handleSignOut() {
-    await supabase.auth.signOut();
-    router.push("/admin/login");
-    router.refresh();
+  function handleSignOut() {
+    startTransition(() => signOut());
   }
 
-  // Don't show the admin sub-header on the login page
   if (pathname === "/admin/login") {
     return <>{children}</>;
   }
@@ -53,9 +50,10 @@ export default function AdminLayout({
           </div>
           <button
             onClick={handleSignOut}
-            className="text-[11px] text-gray-600 hover:text-white uppercase tracking-wider transition-colors"
+            disabled={pending}
+            className="text-[11px] text-gray-600 hover:text-white uppercase tracking-wider transition-colors disabled:opacity-40"
           >
-            Sign Out
+            {pending ? "…" : "Sign Out"}
           </button>
         </div>
       </div>

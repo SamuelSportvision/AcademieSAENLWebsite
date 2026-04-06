@@ -1,38 +1,11 @@
 "use client";
 
-import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useActionState } from "react";
 import Image from "next/image";
-import { createBrowserClient } from "@/lib/supabase/client";
+import { signIn } from "../actions";
 
 export default function AdminLoginPage() {
-  const router = useRouter();
-  const supabase = createBrowserClient();
-
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-
-  async function handleSubmit(e: React.FormEvent) {
-    e.preventDefault();
-    setLoading(true);
-    setError(null);
-
-    const { error: authError } = await supabase.auth.signInWithPassword({
-      email,
-      password,
-    });
-
-    if (authError) {
-      setError(authError.message);
-      setLoading(false);
-      return;
-    }
-
-    router.push("/admin/schedule");
-    router.refresh();
-  }
+  const [state, formAction, pending] = useActionState(signIn, null);
 
   return (
     <div className="min-h-screen bg-[#0f0f0f] flex items-center justify-center px-5 pt-[68px]">
@@ -60,7 +33,7 @@ export default function AdminLoginPage() {
             Sign In
           </h1>
 
-          <form onSubmit={handleSubmit} className="flex flex-col gap-5">
+          <form action={formAction} className="flex flex-col gap-5">
             <div className="flex flex-col gap-1.5">
               <label
                 htmlFor="email"
@@ -70,11 +43,10 @@ export default function AdminLoginPage() {
               </label>
               <input
                 id="email"
+                name="email"
                 type="email"
                 required
                 autoComplete="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
                 className="bg-[#111] border border-white/10 rounded px-4 py-2.5 text-sm text-white placeholder-gray-700 focus:outline-none focus:border-[#C9A84C] transition-colors"
                 placeholder="admin@example.com"
               />
@@ -89,26 +61,25 @@ export default function AdminLoginPage() {
               </label>
               <input
                 id="password"
+                name="password"
                 type="password"
                 required
                 autoComplete="current-password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
                 className="bg-[#111] border border-white/10 rounded px-4 py-2.5 text-sm text-white placeholder-gray-700 focus:outline-none focus:border-[#C9A84C] transition-colors"
                 placeholder="••••••••"
               />
             </div>
 
-            {error && (
-              <p className="text-[#C8102E] text-xs font-semibold">{error}</p>
+            {state?.error && (
+              <p className="text-[#C8102E] text-xs font-semibold">{state.error}</p>
             )}
 
             <button
               type="submit"
-              disabled={loading}
+              disabled={pending}
               className="mt-2 bg-[#C9A84C] text-black font-black text-sm uppercase tracking-widest py-3 rounded hover:bg-yellow-400 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              {loading ? "Signing in…" : "Sign In"}
+              {pending ? "Signing in…" : "Sign In"}
             </button>
           </form>
         </div>
