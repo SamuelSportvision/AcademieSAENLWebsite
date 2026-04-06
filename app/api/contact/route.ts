@@ -165,7 +165,7 @@ export async function POST(request: NextRequest) {
       from: "SAE Academy <noreply@academiesaenl.com>",
       to: ["info@academiesae.com"],
       cc: [email],
-      reply_to: email,
+      replyTo: email,
       subject: `[${subjectLabel}] Message from ${name}`,
       html: htmlBody,
       attachments: resendAttachments,
