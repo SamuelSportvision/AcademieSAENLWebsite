@@ -35,7 +35,7 @@ export default function HomePage() {
             <span className="block text-[clamp(3rem,10vw,7rem)] text-[#C9A84C]">Achieve More.</span>
           </h1>
           <p className="text-gray-300 text-base sm:text-lg max-w-xl leading-relaxed mb-8">
-            SAE Academy gives student-athletes and artists the flexible schedule, qualified coaching, and daily training time to reach their full potential.
+            SAE Academy gives student-athletes and artists an elite afterschool program with qualified coaching, and daily training time to reach their full potential.
           </p>
           <div className="flex flex-col sm:flex-row gap-3">
             <Link
