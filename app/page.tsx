@@ -122,7 +122,7 @@ export default function HomePage() {
               Mission
             </h2>
             <p className="text-red-100 text-base leading-relaxed max-w-md">
-              To create an environment that supports high-level athletic and artistic development — giving athletes and artists proper facilities, and highly qualified coaches to succeed in both their sport and their studies.
+              Our mission is to develop confident, disciplined, and well-rounded individuals through an elite environment where each participant can excel in their discipline. We strive to maximize their potential while fostering passion, teamwork, leadership and a commitment to excellence.
             </p>
           </div>
         </div>
@@ -311,7 +311,7 @@ export default function HomePage() {
                 Partner Schools
               </p>
               <h2 className="font-black text-4xl sm:text-5xl uppercase text-white leading-tight">
-                Here Is Our<br />Partner Schools
+                Eligible Schools<br />for Pickup
               </h2>
             </div>
             <Link
@@ -334,6 +334,9 @@ export default function HomePage() {
           </div>
           <p className="text-gray-600 text-xs mt-5 uppercase tracking-widest">
             + {schools.length - featuredSchools.length} more participating schools
+          </p>
+          <p className="text-gray-700 text-xs mt-4 leading-relaxed max-w-xl">
+            * A minimum of 20 registered students from a school is required for it to be added to the pickup itinerary.
           </p>
         </div>
       </section>
