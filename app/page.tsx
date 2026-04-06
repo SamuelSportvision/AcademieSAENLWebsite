@@ -101,7 +101,7 @@ export default function HomePage() {
               SAE Academy is an elite afterschool program built on a single belief: young athletes and artists deserve the time to train every single day. We partner with established sports organizations across Newfoundland to make that possible.
             </p>
             <p className="text-gray-500 text-sm leading-relaxed mb-8">
-              Our flexible academic schedule means students never have to choose between sport and school. Proper facilities, highly qualified coaches, and daily training — all in one program.
+              Proper facilities, highly qualified coaches, and daily training — all in one program.
             </p>
             <Link
               href="/sports"
