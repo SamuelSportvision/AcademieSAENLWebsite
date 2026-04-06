@@ -28,6 +28,7 @@ export default function Footer() {
             {[
               { href: "/", label: "Home" },
               { href: "/sports", label: "Programs" },
+              { href: "/schedule", label: "Schedule" },
               { href: "/schools", label: "Participating Schools" },
               { href: "/faq", label: "FAQ" },
             ].map((l) => (

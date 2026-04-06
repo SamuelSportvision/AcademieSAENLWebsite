@@ -10,7 +10,7 @@ export const faqs: FaqItem[] = [
     category: "General",
     question: "What is the Sports, Arts, Education Academy?",
     answer:
-      "Sports, Arts, Education Academy (SAE Academy) is a Sports Studies program that started in New Brunswick that combines daily athletic or artistic training with a flexible academic schedule. We partner with established local sports organizations and schools to give student-athletes and artists the time, facilities, and coaching they need to develop at a high level.",
+      "Sports, Arts, Education Academy (SAE Academy) is a Sports Studies program that combines daily athletic or artistic training with a flexible academic schedule. We partner with established local sports organizations and schools to give student-athletes and artists the time, facilities, and coaching they need to develop at a high level.",
   },
   {
     category: "General",
@@ -35,7 +35,7 @@ export const faqs: FaqItem[] = [
     category: "Registration",
     question: "Can I register for more than one sport or discipline?",
     answer:
-      "Please reach out to us directly at info@academiesae.com to discuss multi-discipline options. Scheduling and availability may vary.",
+      "At SAE Academy, we strongly believe in the power of multi-sport athletes, and registering for more than one sport is permitted.",
   },
   {
     category: "Registration",

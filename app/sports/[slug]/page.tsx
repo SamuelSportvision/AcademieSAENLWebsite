@@ -32,7 +32,7 @@ export default async function SportDetailPage({ params }: Props) {
   return (
     <>
       {/* Header — photo hero if image exists, else dark with accent */}
-      <section className="relative min-h-[380px] flex items-end overflow-hidden">
+      <section className="relative min-h-[520px] flex items-end overflow-hidden">
         {sport.image ? (
           <>
             <Image
@@ -41,7 +41,7 @@ export default async function SportDetailPage({ params }: Props) {
               fill
               priority
               sizes="100vw"
-              className="object-cover object-center"
+              className="object-cover object-top"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-black/10" />
           </>

@@ -36,8 +36,9 @@ export default function FaqPage() {
         <div className="max-w-4xl mx-auto flex flex-col gap-14">
           {categories.map((category) => {
             const items = faqs.filter((f) => f.category === category);
+            const id = category === "Tax & Finances" ? "tax-finances" : undefined;
             return (
-              <div key={category}>
+              <div key={category} id={id}>
                 <div className="flex items-center gap-4 mb-6">
                   <p className="text-[#C9A84C] text-[10px] font-bold uppercase tracking-[0.3em] whitespace-nowrap">
                     {category}
@@ -58,7 +59,7 @@ export default function FaqPage() {
             Disclaimer
           </p>
           <p className="text-gray-600 text-xs leading-relaxed">
-            Tax information provided on this page is for general informational purposes only and does not constitute tax or financial advice. Program eligibility for tax credits and deductions may vary based on individual circumstances. We recommend consulting a qualified tax professional or reviewing official guidance from the Canada Revenue Agency (CRA) and the New Brunswick Department of Finance to confirm your eligibility.
+            Tax information provided on this page is for general informational purposes only and does not constitute tax or financial advice. Program eligibility for tax credits and deductions may vary based on individual circumstances. We recommend consulting a qualified tax professional or reviewing official guidance from the Canada Revenue Agency (CRA) and the Newfoundland and Labrador Department of Finance to confirm your eligibility.
           </p>
           <div className="mt-8 flex flex-col sm:flex-row gap-3">
             <a

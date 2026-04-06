@@ -24,7 +24,7 @@ export default function SchoolsPage() {
             Participating<br />Schools
           </h1>
           <p className="text-gray-400 text-base mt-5 max-w-xl leading-relaxed">
-            Students attending the following partner schools in New Brunswick are eligible to apply to the SAE Academy Sports Studies program.
+            Students attending the following partner schools in Newfoundland are eligible to apply to the SAE Academy Sports Studies program.
           </p>
         </div>
       </section>

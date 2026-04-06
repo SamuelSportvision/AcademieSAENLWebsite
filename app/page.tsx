@@ -341,6 +341,77 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* ── TAX REBATE CALLOUT ── */}
+      <section className="bg-[#0f0f0f] py-20 px-5 border-t border-white/10">
+        <div className="max-w-7xl mx-auto">
+          <div className="flex flex-col lg:flex-row gap-12 items-start">
+            {/* Left: heading + description */}
+            <div className="flex-1">
+              <p className="text-[#C9A84C] text-xs font-bold uppercase tracking-[0.3em] mb-3">
+                Tax Benefits
+              </p>
+              <h2 className="font-black text-4xl sm:text-5xl uppercase text-white leading-tight mb-5">
+                Families May<br />Qualify for<br />Tax Rebates
+              </h2>
+              <p className="text-gray-400 text-sm leading-relaxed max-w-prose">
+                Enrolling your child in SAE Academy may entitle your family to significant
+                government tax relief. Provincial and federal programs are available to help
+                offset the cost of youth sport and recreation.
+              </p>
+              <div className="mt-8">
+                <Link
+                  href="/faq#tax-finances"
+                  className="inline-block bg-[#C9A84C] text-black font-black text-sm uppercase tracking-widest px-8 py-4 hover:bg-yellow-400 transition-colors"
+                >
+                  See Tax FAQ
+                </Link>
+              </div>
+            </div>
+            {/* Right: stat cards */}
+            <div className="flex-1 grid grid-cols-1 sm:grid-cols-2 gap-px bg-white/10 w-full">
+              <div className="bg-[#161616] px-7 py-8">
+                <div className="w-5 h-[2px] bg-[#C9A84C] mb-4" />
+                <p className="text-[#C9A84C] text-3xl font-black mb-2">$2,000</p>
+                <p className="text-white text-sm font-bold uppercase tracking-wide mb-2">
+                  Provincial Tax Credit
+                </p>
+                <p className="text-gray-500 text-xs leading-relaxed">
+                  Up to $2,000 per family per year through the NL Physical Activity Tax Credit
+                  for fees paid toward eligible sport and recreation programs.
+                </p>
+              </div>
+              <div className="bg-[#161616] px-7 py-8">
+                <div className="w-5 h-[2px] bg-[#C9A84C] mb-4" />
+                <p className="text-[#C9A84C] text-3xl font-black mb-2">Federal</p>
+                <p className="text-white text-sm font-bold uppercase tracking-wide mb-2">
+                  Child-Care Deduction
+                </p>
+                <p className="text-gray-500 text-xs leading-relaxed">
+                  Program fees may also qualify as eligible child-care expenses on your
+                  federal return, reducing your overall taxable income.
+                </p>
+              </div>
+              <div className="bg-[#161616] px-7 py-8 sm:col-span-2">
+                <div className="w-5 h-[2px] bg-[#C9A84C] mb-4" />
+                <p className="text-white text-sm font-bold uppercase tracking-wide mb-2">
+                  Tax Receipts Available
+                </p>
+                <p className="text-gray-500 text-xs leading-relaxed">
+                  Need documentation for your tax return? Contact us at{" "}
+                  <a
+                    href="mailto:info@academiesae.com"
+                    className="text-[#C9A84C] hover:text-yellow-400 transition-colors"
+                  >
+                    info@academiesae.com
+                  </a>{" "}
+                  and we&apos;ll provide the receipts you need.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* ── FAQ TEASER ── */}
       <section className="bg-[#0f0f0f] py-20 px-5 border-t border-white/10">
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6">
