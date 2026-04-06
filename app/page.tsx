@@ -134,7 +134,7 @@ export default function HomePage() {
               Vision
             </h2>
             <p className="text-white/70 text-base leading-relaxed max-w-md">
-              To become Newfoundland&apos;s leading reference for sport and artistic development. Through an innovative, adapted academic program, young people will practice their discipline daily and reach their highest potential.
+              To become Newfoundland&apos;s leading reference for sport and artistic development. Through innovation, young artists and athletes will practice their discipline daily and reach their highest potential.
             </p>
           </div>
         </div>
