@@ -281,9 +281,7 @@ export default function HomePage() {
             <p className="text-gray-300 text-base leading-relaxed mb-4">
               Every program at SAE Academy is led by experienced, qualified coaches with a passion for athlete development. From on-ice hockey sessions to baseball fundamentals, our coaches bring the expertise your athlete needs to grow.
             </p>
-            <p className="text-gray-500 text-sm leading-relaxed mb-8">
-              Small group training means your athlete gets real attention and individualized feedback every single session.
-            </p>
+
             <Link
               href="/sports"
               className="self-start border-2 border-[#C9A84C] text-[#C9A84C] font-black text-sm uppercase tracking-widest px-8 py-4 hover:bg-[#C9A84C] hover:text-black transition-colors"
