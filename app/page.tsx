@@ -313,6 +313,9 @@ export default function HomePage() {
               <h2 className="font-black text-4xl sm:text-5xl uppercase text-white leading-tight">
                 Eligible Schools<br />for Pickup
               </h2>
+              <p className="text-gray-500 text-sm mt-4 leading-relaxed max-w-xl">
+                * A minimum of 20 registered students from a school is required for it to be added to the pickup itinerary.
+              </p>
             </div>
             <Link
               href="/schools"
@@ -334,9 +337,6 @@ export default function HomePage() {
           </div>
           <p className="text-gray-600 text-xs mt-5 uppercase tracking-widest">
             + {schools.length - featuredSchools.length} more participating schools
-          </p>
-          <p className="text-gray-700 text-xs mt-4 leading-relaxed max-w-xl">
-            * A minimum of 20 registered students from a school is required for it to be added to the pickup itinerary.
           </p>
         </div>
       </section>
