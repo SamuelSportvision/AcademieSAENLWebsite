@@ -35,7 +35,7 @@ export default function HomePage() {
             <span className="block text-[clamp(3rem,10vw,7rem)] text-[#C9A84C]">Achieve More.</span>
           </h1>
           <p className="text-gray-300 text-base sm:text-lg max-w-xl leading-relaxed mb-8">
-            SAE Academy gives student-athletes and artists an elite afterschool program with qualified coaching, and daily training time to reach their full potential.
+            SAE Academy gives athletes and artists an elite afterschool program with qualified coaching, and weekly training time to reach their full potential.
           </p>
           <div className="flex flex-col sm:flex-row gap-3">
             <Link
@@ -62,7 +62,7 @@ export default function HomePage() {
           {[
             { value: "8", label: "Disciplines" },
             { value: "12", label: "Partner Schools" },
-            { value: "Daily", label: "Training" },
+            { value: "Weekly", label: "Training" },
           ].map((stat) => (
             <div key={stat.label} className="flex flex-col items-center py-1 gap-0.5">
               <span className="font-black text-2xl sm:text-3xl text-black uppercase">
@@ -98,10 +98,10 @@ export default function HomePage() {
               Building Champions,<br />One Session at a Time.
             </h2>
             <p className="text-gray-300 text-base leading-relaxed mb-4">
-              SAE Academy is an elite afterschool program built on a single belief: young athletes and artists deserve the time to train every single day. We partner with established sports organizations across Newfoundland to make that possible.
+              SAE Academy is an elite afterschool program built on a single belief: young athletes and artists deserve the time to train every single week. We partner with established sports organizations across Newfoundland to make that possible.
             </p>
             <p className="text-gray-500 text-sm leading-relaxed mb-8">
-              Proper facilities, highly qualified coaches, and daily training — all in one program.
+              Proper facilities, highly qualified coaches, and weekly training — all in one program.
             </p>
             <Link
               href="/sports"
@@ -134,7 +134,7 @@ export default function HomePage() {
               Vision
             </h2>
             <p className="text-white/70 text-base leading-relaxed max-w-md">
-              To become Newfoundland&apos;s leading reference for sport and artistic development. Through innovation, young artists and athletes will practice their discipline daily and reach their highest potential.
+              To become Newfoundland&apos;s leading reference for sport and artistic development. Through innovation, young artists and athletes will practice their discipline weekly and reach their highest potential.
             </p>
           </div>
         </div>

@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import { sports, getSportBySlug } from "@/data/sports";
+import ContactModal from "@/components/ContactModal";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -72,9 +73,6 @@ export default async function SportDetailPage({ params }: Props) {
                   Partner: {sport.partner}
                 </p>
               )}
-              <p className="text-gray-200 text-lg font-semibold mt-3 max-w-xl">
-                {sport.tagline}
-              </p>
             </div>
           </div>
         </div>
@@ -130,12 +128,10 @@ export default async function SportDetailPage({ params }: Props) {
                 Visit {sport.partner}
               </Link>
             )}
-            <a
-              href="mailto:info@academiesae.com"
+            <ContactModal
+              label="Contact Us"
               className="border border-white/20 text-gray-400 font-bold text-xs uppercase tracking-widest px-6 py-4 text-center hover:border-white/40 hover:text-white transition-colors"
-            >
-              info@academiesae.com
-            </a>
+            />
 
             {/* Nav to other programs */}
             <div className="mt-6 pt-6 border-t border-white/10">

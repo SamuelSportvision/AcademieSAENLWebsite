@@ -10,7 +10,7 @@ export const faqs: FaqItem[] = [
     category: "General",
     question: "What is the Sports, Arts, Education Academy?",
     answer:
-      "Sports, Arts, Education Academy (SAE Academy) is a Sports Studies program that combines daily athletic or artistic training with a flexible academic schedule. We partner with established local sports organizations and schools to give student-athletes and artists the time, facilities, and coaching they need to develop at a high level.",
+      "Sports, Arts, Education Academy (SAE Academy) is a Sports Studies program that combines weekly athletic or artistic training with qualified coaching. We partner with established local sports organizations and schools to give athletes and artists the time, facilities, and coaching they need to develop at a high level.",
   },
   {
     category: "General",

@@ -2,11 +2,12 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { sports } from "@/data/sports";
+import ContactModal from "@/components/ContactModal";
 
 export const metadata: Metadata = {
   title: "Programs | Sports, Arts, Education Academy",
   description:
-    "Browse all SAE Academy disciplines — Hockey, Volleyball, Basketball, Dance, and more. Daily training with qualified coaches and a flexible academic schedule.",
+    "Browse all SAE Academy disciplines — Hockey, Volleyball, Basketball, Dance, and more. Weekly training with qualified coaches.",
 };
 
 export default function SportsPage() {
@@ -32,7 +33,7 @@ export default function SportsPage() {
             Our Programs
           </h1>
           <p className="text-gray-300 text-base mt-4 max-w-xl leading-relaxed">
-            Choose your discipline. Train every day alongside qualified coaches and partner organizations. Click any program to learn more and register.
+            Choose your discipline. Train every week alongside qualified coaches and partner organizations. Click any program to learn more and register.
           </p>
         </div>
       </section>
@@ -80,7 +81,6 @@ export default function SportsPage() {
                       {sport.partner}
                     </p>
                   )}
-                  <p className="text-gray-300 text-sm leading-relaxed mb-3">{sport.tagline}</p>
                   <p className="text-[#C9A84C] text-xs font-bold uppercase tracking-widest group-hover:underline">
                     Learn More &amp; Register →
                   </p>
@@ -98,12 +98,10 @@ export default function SportsPage() {
             <p className="text-white font-bold text-lg">Not sure which program fits you?</p>
             <p className="text-gray-400 text-sm mt-1">Reach out and we will help you find the right fit.</p>
           </div>
-          <a
-            href="mailto:info@academiesae.com"
+          <ContactModal
+            label="Contact Us"
             className="bg-[#C9A84C] text-black font-black text-sm uppercase tracking-widest px-8 py-4 hover:bg-yellow-400 transition-colors flex-shrink-0"
-          >
-            Contact Us
-          </a>
+          />
         </div>
       </section>
     </>
