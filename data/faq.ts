@@ -10,19 +10,31 @@ export const faqs: FaqItem[] = [
     category: "General",
     question: "What is the Sports, Arts, Education Academy?",
     answer:
-      "Sports, Arts, Education Academy (SAE Academy) is a Sports Studies program that combines weekly athletic or artistic training with qualified coaching. We partner with established local sports organizations and schools to give athletes and artists the time, facilities, and coaching they need to develop at a high level.",
-  },
-  {
-    category: "General",
-    question: "Which schools are part of the program?",
-    answer:
-      "We currently work with 12 partner schools in the St. John's / Newfoundland area, including Holy Trinity Elementary, St. Francis of Assisi, Mary Queen of Peace, Paradise Intermediate, and more. See our full list on the [Schools page](/schools).",
+      "Sports, Arts, Education Academy (SAE Academy) is an elite afterschool program that combines weekly athletic or artistic training with qualified coaching. We partner with established local sports organizations to give athletes and artists the time, facilities, and coaching they need to develop at a high level.",
   },
   {
     category: "General",
     question: "What sports and disciplines are available?",
     answer:
       "We currently offer programming in Hockey, Cheerleading, Volleyball, Baseball, Basketball, Boxing, Dance, and Soccer. Each discipline is supported by a partner organization and qualified coaches.",
+  },
+  {
+    category: "General",
+    question: "What happens if the 20-student minimum is not met — will I get my deposit back?",
+    answer:
+      "Yes. If the minimum requirement of 20 students is not met, all program deposits paid at registration will be fully refunded.",
+  },
+  {
+    category: "General",
+    question: "Where can I drop my athlete's hockey bag?",
+    answer:
+      "Hockey bags can be dropped off in the morning at the arena in an assigned dressing room.",
+  },
+  {
+    category: "General",
+    question: "Can I withdraw my child from the program?",
+    answer:
+      "Participation in the SAE Academy program is a full-year commitment. Should you choose to withdraw before the end of the program year, cancellation fees will apply.",
   },
   // Registration
   {

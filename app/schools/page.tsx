@@ -1,7 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { schools } from "@/data/schools";
+import { createAdminClient } from "@/lib/supabase/server";
+import { schools as staticSchools, type School } from "@/data/schools";
 import ContactModal from "@/components/ContactModal";
+
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "Participating Schools | SAE Academy",
@@ -9,7 +12,26 @@ export const metadata: Metadata = {
     "See the list of partner schools in the SAE Academy Sports Studies program in New Brunswick.",
 };
 
-export default function SchoolsPage() {
+async function getSchools(): Promise<School[]> {
+  try {
+    const admin = createAdminClient();
+    const { data, error } = await admin
+      .from("schools")
+      .select("name, level")
+      .order("level")
+      .order("sort_order")
+      .order("name");
+
+    if (error || !data || data.length === 0) return staticSchools;
+    return data as School[];
+  } catch {
+    return staticSchools;
+  }
+}
+
+export default async function SchoolsPage() {
+  const schools = await getSchools();
+
   return (
     <>
       {/* Page Header */}

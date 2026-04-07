@@ -34,7 +34,7 @@ export const sports: Sport[] = [
   {
     slug: "cheerleading",
     name: "Cheerleading",
-    partner: null,
+    partner: "Cheer Sport Sharks",
     partnerUrl: null,
     registrationUrl: TEAMSNAP_URL,
     tagline: "Strength, precision, and teamwork every day.",
@@ -43,7 +43,7 @@ export const sports: Sport[] = [
     highlights: [
       "Weekly practice with certified coaches",
       "Strength and conditioning included",
-      "Performance and competition preparation",
+      "Partner program: Cheer Sport Sharks",
     ],
     accentColor: "#EC4899",
     image: "/images/cheerleading-card.png",
@@ -102,7 +102,7 @@ export const sports: Sport[] = [
   {
     slug: "boxing",
     name: "Boxing",
-    partner: null,
+    partner: "NL Boxing",
     partnerUrl: null,
     registrationUrl: TEAMSNAP_URL,
     tagline: "Discipline, focus, and dedication — every day.",
@@ -111,7 +111,7 @@ export const sports: Sport[] = [
     highlights: [
       "Weekly training with qualified boxing coaches",
       "Focus on technique, fitness, and mental strength",
-      "Safe and structured training environment",
+      "Partner program: NL Boxing",
     ],
     accentColor: "#EF4444",
     image: "/images/boxing-card.png",
@@ -136,7 +136,7 @@ export const sports: Sport[] = [
   {
     slug: "soccer",
     name: "Soccer",
-    partner: null,
+    partner: "Pro Touch Academy",
     partnerUrl: null,
     registrationUrl: TEAMSNAP_URL,
     tagline: "Train harder. Play smarter.",
@@ -145,10 +145,10 @@ export const sports: Sport[] = [
     highlights: [
       "Weekly technical and tactical training",
       "Conditioning and game preparation",
-      "Experienced coaching staff",
+      "Partner program: Pro Touch Academy",
     ],
     accentColor: "#22C55E",
-    image: "/images/soccer-card.png",
+    image: "/images/soccer-hero.png",
   },
 ];
 

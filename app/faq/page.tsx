@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
-import { faqs } from "@/data/faq";
+import { createAdminClient } from "@/lib/supabase/server";
+import { faqs as staticFaqs, type FaqItem } from "@/data/faq";
 import FaqAccordion from "@/components/FaqAccordion";
+
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "FAQ | SAE Academy",
@@ -8,9 +11,28 @@ export const metadata: Metadata = {
     "Frequently asked questions about the SAE Academy program, registration, and available tax credits for families in New Brunswick.",
 };
 
-const categories = ["General", "Registration", "Tax & Finances"] as const;
+const CATEGORIES = ["General", "Registration", "Tax & Finances"] as const;
 
-export default function FaqPage() {
+async function getFaqs(): Promise<FaqItem[]> {
+  try {
+    const admin = createAdminClient();
+    const { data, error } = await admin
+      .from("faqs")
+      .select("category, question, answer")
+      .order("category")
+      .order("sort_order")
+      .order("created_at");
+
+    if (error || !data || data.length === 0) return staticFaqs;
+    return data as FaqItem[];
+  } catch {
+    return staticFaqs;
+  }
+}
+
+export default async function FaqPage() {
+  const faqs = await getFaqs();
+
   return (
     <>
       {/* Page Header */}
@@ -34,8 +56,9 @@ export default function FaqPage() {
       {/* FAQ Body */}
       <section className="bg-[#0f0f0f] py-16 px-5">
         <div className="max-w-4xl mx-auto flex flex-col gap-14">
-          {categories.map((category) => {
+          {CATEGORIES.map((category) => {
             const items = faqs.filter((f) => f.category === category);
+            if (items.length === 0) return null;
             const id = category === "Tax & Finances" ? "tax-finances" : undefined;
             return (
               <div key={category} id={id}>

@@ -61,7 +61,7 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto px-5 py-5 grid grid-cols-3 divide-x divide-black/20">
           {[
             { value: "8", label: "Disciplines" },
-            { value: "12", label: "Partner Schools" },
+            { value: "45", label: "Eligible Schools" },
             { value: "Weekly", label: "Training" },
           ].map((stat) => (
             <div key={stat.label} className="flex flex-col items-center py-1 gap-0.5">

@@ -7,6 +7,8 @@ import { signOut } from "./actions";
 
 const adminNav = [
   { href: "/admin/schedule", label: "Schedule" },
+  { href: "/admin/faq", label: "FAQ" },
+  { href: "/admin/schools", label: "Schools" },
 ];
 
 export default function AdminLayout({
