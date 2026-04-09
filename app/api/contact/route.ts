@@ -157,7 +157,7 @@ export async function POST(request: NextRequest) {
 
     await resend.emails.send({
       from: "SAE Academy <noreply@academiesaenl.com>",
-      to: ["info@academiesae.com"],
+      to: ["info@saeacademynl.com"],
       cc: [email],
       replyTo: email,
       subject: `[${subjectLabel}] Message from ${name}`,

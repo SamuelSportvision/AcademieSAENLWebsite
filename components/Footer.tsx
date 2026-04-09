@@ -51,10 +51,10 @@ export default function Footer() {
           </p>
           <p className="text-gray-600 text-xs mb-2 uppercase tracking-wider">For inquiries:</p>
           <a
-            href="mailto:info@academiesae.com"
+            href="mailto:info@saeacademynl.com"
             className="text-white text-sm font-bold hover:text-[#C9A84C] transition-colors break-all"
           >
-            info@academiesae.com
+            info@saeacademynl.com
           </a>
           <p className="text-gray-700 text-[10px] mt-8 uppercase tracking-wider">
             &copy; {new Date().getFullYear()} Sports, Arts, Education Academy

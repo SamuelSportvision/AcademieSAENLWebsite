@@ -399,10 +399,10 @@ export default function HomePage() {
                 <p className="text-gray-500 text-xs leading-relaxed">
                   Need documentation for your tax return? Contact us at{" "}
                   <a
-                    href="mailto:info@academiesae.com"
+                    href="mailto:info@saeacademynl.com"
                     className="text-[#C9A84C] hover:text-yellow-400 transition-colors"
                   >
-                    info@academiesae.com
+                    info@saeacademynl.com
                   </a>{" "}
                   and we&apos;ll provide the receipts you need.
                 </p>
