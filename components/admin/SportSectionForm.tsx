@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import type {
   SectionType,
   SportSection,
@@ -119,25 +119,128 @@ function ImageTextFields({ content, onChange }: {
   content: Partial<ImageTextContent>;
   onChange: (c: ImageTextContent) => void;
 }) {
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  const [uploading, setUploading] = useState(false);
+  const [uploadError, setUploadError] = useState<string | null>(null);
+
   function update(key: keyof ImageTextContent, value: string) {
-    onChange({ image_url: content.image_url ?? "", body: content.body ?? "", image_side: content.image_side ?? "left", [key]: value } as ImageTextContent);
+    onChange({
+      image_url: content.image_url ?? "",
+      body: content.body ?? "",
+      image_side: content.image_side ?? "left",
+      [key]: value,
+    } as ImageTextContent);
   }
+
+  async function handleFileChange(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    setUploading(true);
+    setUploadError(null);
+
+    try {
+      const fd = new FormData();
+      fd.append("file", file);
+
+      const res = await fetch("/api/storage/upload", { method: "POST", body: fd });
+      const json = await res.json();
+
+      if (!res.ok) throw new Error(json.error ?? "Upload failed");
+      update("image_url", json.url);
+    } catch (err) {
+      setUploadError(err instanceof Error ? err.message : "Upload failed");
+    } finally {
+      setUploading(false);
+      // Reset input so the same file can be re-selected if needed
+      if (fileInputRef.current) fileInputRef.current.value = "";
+    }
+  }
+
+  const hasImage = !!content.image_url;
 
   return (
     <div className="flex flex-col gap-4">
+      {/* ── Image upload area ── */}
       <div className="flex flex-col gap-1.5">
-        <Label htmlFor="image_url">Image URL</Label>
+        <Label>Image</Label>
+
+        {/* Preview */}
+        {hasImage && (
+          <div className="relative w-full aspect-[16/9] rounded overflow-hidden border border-white/10 bg-[#111] mb-1">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={content.image_url}
+              alt="Preview"
+              className="w-full h-full object-cover"
+            />
+            <button
+              type="button"
+              onClick={() => update("image_url", "")}
+              className="absolute top-2 right-2 bg-black/70 hover:bg-black text-white text-xs font-bold px-2.5 py-1 rounded transition-colors"
+            >
+              ✕ Remove
+            </button>
+          </div>
+        )}
+
+        {/* Upload button */}
+        <div className="flex items-center gap-2">
+          <button
+            type="button"
+            onClick={() => fileInputRef.current?.click()}
+            disabled={uploading}
+            className="flex items-center gap-2 bg-[#1a1a1a] border border-white/15 hover:border-[#C9A84C]/50 text-gray-300 hover:text-[#C9A84C] text-xs font-bold uppercase tracking-wider px-4 py-2.5 rounded transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            {uploading ? (
+              <>
+                <span className="inline-block w-3 h-3 border-2 border-[#C9A84C]/30 border-t-[#C9A84C] rounded-full animate-spin" />
+                Uploading…
+              </>
+            ) : (
+              <>
+                <span className="text-base leading-none">↑</span>
+                {hasImage ? "Replace Image" : "Upload Image"}
+              </>
+            )}
+          </button>
+
+          {/* Hidden native file input */}
+          <input
+            ref={fileInputRef}
+            type="file"
+            accept="image/jpeg,image/png,image/webp,image/gif,image/svg+xml"
+            className="hidden"
+            onChange={handleFileChange}
+          />
+
+          {/* Manual URL fallback */}
+          {!hasImage && (
+            <span className="text-[10px] text-gray-600 uppercase tracking-wider">or paste URL below</span>
+          )}
+        </div>
+
+        {/* Upload error */}
+        {uploadError && (
+          <p className="text-[#C8102E] text-xs font-semibold">{uploadError}</p>
+        )}
+
+        {/* Manual URL input */}
         <input
           id="image_url"
           type="text"
-          required
           value={content.image_url ?? ""}
           onChange={(e) => update("image_url", e.target.value)}
-          placeholder="/images/your-image.jpg or https://…"
+          placeholder="https://… or /images/your-image.jpg"
           className={fieldClass("w-full")}
         />
-        <p className="text-[10px] text-gray-600">Use a path like <code className="text-gray-500">/images/hockey-team.jpg</code> for files in your public folder.</p>
+        <p className="text-[10px] text-gray-600">
+          Uploads go to your <span className="text-gray-500">websiteimages</span> Supabase bucket.
+          Max 8 MB · JPG, PNG, WebP, GIF, SVG.
+        </p>
       </div>
+
+      {/* Image position */}
       <div className="flex flex-col gap-1.5">
         <Label htmlFor="image_side">Image Position</Label>
         <select
@@ -150,6 +253,8 @@ function ImageTextFields({ content, onChange }: {
           <option value="right">Image on Right</option>
         </select>
       </div>
+
+      {/* Body text */}
       <div className="flex flex-col gap-1.5">
         <Label htmlFor="img_body">Body Text</Label>
         <textarea
