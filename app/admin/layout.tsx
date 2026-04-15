@@ -10,6 +10,7 @@ const adminNav = [
   { href: "/admin/faq", label: "FAQ" },
   { href: "/admin/schools", label: "Schools" },
   { href: "/admin/sports", label: "Sports Pages" },
+  { href: "/admin/forms", label: "Forms" },
 ];
 
 export default function AdminLayout({

@@ -269,3 +269,62 @@ INSERT INTO schools (name, level, sort_order) VALUES
   ('Vanier Elementary',               'Elementary',   0),
   ('Villanova Junior High',           'Intermediate', 0)
 ON CONFLICT DO NOTHING;
+
+-- ─── FORMS ───────────────────────────────────────────────────────────────────
+-- General-purpose form builder. Each form is hosted at /forms/[slug].
+
+CREATE TABLE IF NOT EXISTS forms (
+  id                 UUID        DEFAULT gen_random_uuid() PRIMARY KEY,
+  name               TEXT        NOT NULL,
+  slug               TEXT        NOT NULL UNIQUE,
+  description        TEXT,
+  success_message    TEXT        NOT NULL DEFAULT 'Thank you! Your response has been submitted.',
+  notification_email TEXT,
+  is_active          BOOLEAN     NOT NULL DEFAULT true,
+  created_at         TIMESTAMPTZ DEFAULT NOW(),
+  updated_at         TIMESTAMPTZ DEFAULT NOW()
+);
+
+ALTER TABLE forms ENABLE ROW LEVEL SECURITY;
+CREATE POLICY "Public read active forms"  ON forms FOR SELECT USING (true);
+CREATE POLICY "Authenticated write forms" ON forms FOR ALL USING (auth.role() = 'authenticated');
+
+DROP TRIGGER IF EXISTS forms_updated_at ON forms;
+CREATE TRIGGER forms_updated_at
+  BEFORE UPDATE ON forms
+  FOR EACH ROW EXECUTE FUNCTION update_updated_at();
+
+-- ─── FORM FIELDS ─────────────────────────────────────────────────────────────
+-- field_type: text | email | phone | number | date | textarea | select | checkbox
+
+CREATE TABLE IF NOT EXISTS form_fields (
+  id          UUID        DEFAULT gen_random_uuid() PRIMARY KEY,
+  form_id     UUID        NOT NULL REFERENCES forms(id) ON DELETE CASCADE,
+  field_type  TEXT        NOT NULL
+                CHECK (field_type IN ('text','email','phone','number','date','textarea','select','checkbox')),
+  label       TEXT        NOT NULL,
+  placeholder TEXT,
+  options     JSONB,        -- string[] for select dropdowns
+  required    BOOLEAN     NOT NULL DEFAULT false,
+  sort_order  INTEGER     NOT NULL DEFAULT 0,
+  created_at  TIMESTAMPTZ DEFAULT NOW()
+);
+
+ALTER TABLE form_fields ENABLE ROW LEVEL SECURITY;
+CREATE POLICY "Public read form fields"        ON form_fields FOR SELECT USING (true);
+CREATE POLICY "Authenticated write form fields" ON form_fields FOR ALL USING (auth.role() = 'authenticated');
+
+-- ─── FORM SUBMISSIONS ────────────────────────────────────────────────────────
+-- data is a JSONB object: { "Field Label": "submitted value", … }
+
+CREATE TABLE IF NOT EXISTS form_submissions (
+  id           UUID        DEFAULT gen_random_uuid() PRIMARY KEY,
+  form_id      UUID        NOT NULL REFERENCES forms(id) ON DELETE CASCADE,
+  data         JSONB       NOT NULL,
+  submitted_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+ALTER TABLE form_submissions ENABLE ROW LEVEL SECURITY;
+CREATE POLICY "Public insert submissions"          ON form_submissions FOR INSERT WITH CHECK (true);
+CREATE POLICY "Authenticated read submissions"     ON form_submissions FOR SELECT USING (auth.role() = 'authenticated');
+CREATE POLICY "Authenticated delete submissions"   ON form_submissions FOR DELETE USING (auth.role() = 'authenticated');
