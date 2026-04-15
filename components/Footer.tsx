@@ -62,6 +62,35 @@ export default function Footer() {
         </div>
       </div>
 
+      {/* Mailing List CTA */}
+      <div className="border-t border-white/10">
+        <div className="max-w-7xl mx-auto px-5 py-10 flex flex-col sm:flex-row items-center justify-between gap-6">
+          <div>
+            <p className="text-[#C9A84C] text-[10px] font-bold uppercase tracking-[0.3em] mb-1">
+              Stay in the loop
+            </p>
+            <p className="text-white text-sm font-bold">
+              Join our mailing list
+            </p>
+            <p className="text-gray-500 text-xs mt-1 max-w-xs">
+              Be among the first to secure a spot in the SAE Academy&apos;s Elite After-School Development Program.
+            </p>
+          </div>
+          <a
+            href="https://mailchi.mp/saeacademynl/email-sign-up"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="shrink-0 inline-flex items-center gap-2 bg-[#C9A84C] hover:bg-[#b8933d] text-black text-xs font-bold uppercase tracking-widest px-6 py-3 transition-colors"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <rect width="20" height="16" x="2" y="4" rx="2"/>
+              <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+            </svg>
+            Sign Up Now
+          </a>
+        </div>
+      </div>
+
       {/* Bottom bar */}
       <div className="h-[3px] bg-gradient-to-r from-[#C8102E] via-[#C9A84C] to-[#C8102E]" />
     </footer>

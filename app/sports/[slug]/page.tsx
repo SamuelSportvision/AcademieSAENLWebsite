@@ -4,13 +4,15 @@ import Link from "next/link";
 import Image from "next/image";
 import { sports, getSportBySlug } from "@/data/sports";
 import ContactModal from "@/components/ContactModal";
+import SportSections from "@/components/SportSections";
+import type { SportSection } from "@/components/SportSections";
+import { createAdminClient } from "@/lib/supabase/server";
+
+// Always fetch fresh so CMS edits appear immediately.
+export const dynamic = "force-dynamic";
 
 interface Props {
   params: Promise<{ slug: string }>;
-}
-
-export async function generateStaticParams() {
-  return sports.map((s) => ({ slug: s.slug }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -23,16 +25,38 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
+async function fetchSections(slug: string): Promise<SportSection[]> {
+  try {
+    const admin = createAdminClient();
+    const { data, error } = await admin
+      .from("sport_page_sections")
+      .select("*")
+      .eq("sport_slug", slug)
+      .eq("is_visible", true)
+      .order("sort_order")
+      .order("created_at");
+
+    if (error) throw error;
+    return (data ?? []) as SportSection[];
+  } catch {
+    return [];
+  }
+}
+
 export default async function SportDetailPage({ params }: Props) {
   const { slug } = await params;
   const sport = getSportBySlug(slug);
   if (!sport) notFound();
 
   const index = sports.findIndex((s) => s.slug === slug);
+  const sections = await fetchSections(slug);
+
+  // Fall back to static content when no CMS sections exist yet.
+  const hasCmsSections = sections.length > 0;
 
   return (
     <>
-      {/* Header — photo hero if image exists, else dark with accent */}
+      {/* Hero */}
       <section className="relative min-h-[520px] flex items-end overflow-hidden">
         {sport.image ? (
           <>
@@ -81,31 +105,37 @@ export default async function SportDetailPage({ params }: Props) {
       {/* Body */}
       <section className="bg-[#0f0f0f] py-16 px-5">
         <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-12">
-          {/* Left: content */}
-          <div className="lg:col-span-2 flex flex-col gap-8">
-            <div>
-              <p className="text-[#C9A84C] text-[10px] font-bold uppercase tracking-[0.3em] mb-4">
-                About
-              </p>
-              <p className="text-gray-300 text-base leading-relaxed">{sport.description}</p>
-            </div>
 
-            <div>
-              <p className="text-[#C9A84C] text-[10px] font-bold uppercase tracking-[0.3em] mb-5">
-                Program Highlights
-              </p>
-              <ul className="flex flex-col gap-4">
-                {sport.highlights.map((h, i) => (
-                  <li key={i} className="flex items-start gap-4">
-                    <div className="w-[3px] flex-shrink-0 self-stretch mt-1 bg-[#C9A84C]" />
-                    <span className="text-white text-sm font-medium leading-relaxed">{h}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
+          {/* Left: CMS sections or static fallback */}
+          <div className="lg:col-span-2 flex flex-col gap-8">
+            {hasCmsSections ? (
+              <SportSections sections={sections} />
+            ) : (
+              <>
+                <div>
+                  <p className="text-[#C9A84C] text-[10px] font-bold uppercase tracking-[0.3em] mb-4">
+                    About
+                  </p>
+                  <p className="text-gray-300 text-base leading-relaxed">{sport.description}</p>
+                </div>
+                <div>
+                  <p className="text-[#C9A84C] text-[10px] font-bold uppercase tracking-[0.3em] mb-5">
+                    Program Highlights
+                  </p>
+                  <ul className="flex flex-col gap-4">
+                    {sport.highlights.map((h, i) => (
+                      <li key={i} className="flex items-start gap-4">
+                        <div className="w-[3px] flex-shrink-0 self-stretch mt-1 bg-[#C9A84C]" />
+                        <span className="text-white text-sm font-medium leading-relaxed">{h}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </>
+            )}
           </div>
 
-          {/* Right: CTAs */}
+          {/* Right: CTAs + other programs */}
           <div className="flex flex-col gap-3">
             <p className="text-[#C9A84C] text-[10px] font-bold uppercase tracking-[0.3em] mb-2">
               Register
@@ -133,7 +163,6 @@ export default async function SportDetailPage({ params }: Props) {
               className="border border-white/20 text-gray-400 font-bold text-xs uppercase tracking-widest px-6 py-4 text-center hover:border-white/40 hover:text-white transition-colors"
             />
 
-            {/* Nav to other programs */}
             <div className="mt-6 pt-6 border-t border-white/10">
               <p className="text-gray-600 text-[10px] font-bold uppercase tracking-[0.2em] mb-3">
                 Other Programs

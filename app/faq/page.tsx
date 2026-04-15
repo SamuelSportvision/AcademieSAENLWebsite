@@ -46,8 +46,8 @@ export default async function FaqPage() {
           </h1>
           <p className="text-gray-400 text-base mt-5 max-w-xl leading-relaxed">
             Can&apos;t find what you&apos;re looking for? Email us at{" "}
-            <a href="mailto:info@academiesae.com" className="text-[#C9A84C] hover:underline">
-              info@academiesae.com
+            <a href="mailto:info@saeacademynl.com" className="text-[#C9A84C] hover:underline">
+              info@saeacademynl.com
             </a>
           </p>
         </div>
@@ -86,7 +86,7 @@ export default async function FaqPage() {
           </p>
           <div className="mt-8 flex flex-col sm:flex-row gap-3">
             <a
-              href="mailto:info@academiesae.com"
+              href="mailto:info@saeacademynl.com"
               className="bg-[#C8102E] text-white font-black text-sm uppercase tracking-widest px-8 py-4 hover:bg-red-700 transition-colors text-center"
             >
               Email Us

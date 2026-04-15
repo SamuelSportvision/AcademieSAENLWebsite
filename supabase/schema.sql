@@ -105,6 +105,120 @@ CREATE POLICY "Authenticated write schools"
   ON schools FOR ALL
   USING (auth.role() = 'authenticated');
 
+-- ─── SPORT PAGE SECTIONS ────────────────────────────────────────────────────
+-- Flexible content sections for each sport's public page (CMS-driven).
+-- section_type options: 'text' | 'highlights' | 'image_text' | 'stats' | 'cta'
+-- content is a JSONB object whose shape varies by section_type:
+--   text        → { body: string }
+--   highlights  → { items: string[] }
+--   image_text  → { image_url: string, body: string, image_side: "left"|"right" }
+--   stats       → { items: { label: string, value: string }[] }
+--   cta         → { heading: string, body?: string, button_label: string, button_url: string, button_style: "primary"|"secondary" }
+
+CREATE TABLE IF NOT EXISTS sport_page_sections (
+  id           UUID        DEFAULT gen_random_uuid() PRIMARY KEY,
+  sport_slug   TEXT        NOT NULL,
+  section_type TEXT        NOT NULL
+                 CHECK (section_type IN ('text','highlights','image_text','stats','cta')),
+  title        TEXT,
+  content      JSONB       NOT NULL DEFAULT '{}',
+  sort_order   INTEGER     NOT NULL DEFAULT 0,
+  is_visible   BOOLEAN     NOT NULL DEFAULT true,
+  created_at   TIMESTAMPTZ DEFAULT NOW(),
+  updated_at   TIMESTAMPTZ DEFAULT NOW()
+);
+
+ALTER TABLE sport_page_sections ENABLE ROW LEVEL SECURITY;
+
+CREATE POLICY "Public read sport sections"
+  ON sport_page_sections FOR SELECT
+  USING (true);
+
+CREATE POLICY "Authenticated write sport sections"
+  ON sport_page_sections FOR ALL
+  USING (auth.role() = 'authenticated');
+
+-- Trigger to keep updated_at current
+CREATE OR REPLACE FUNCTION update_updated_at()
+RETURNS TRIGGER LANGUAGE plpgsql AS $$
+BEGIN NEW.updated_at = NOW(); RETURN NEW; END;
+$$;
+
+DROP TRIGGER IF EXISTS sport_page_sections_updated_at ON sport_page_sections;
+CREATE TRIGGER sport_page_sections_updated_at
+  BEFORE UPDATE ON sport_page_sections
+  FOR EACH ROW EXECUTE FUNCTION update_updated_at();
+
+-- ─── SEED: Sport Page Sections ───────────────────────────────────────────────
+-- Pre-populated from static data/sports.ts so every sport starts with content.
+
+INSERT INTO sport_page_sections (sport_slug, section_type, title, content, sort_order) VALUES
+  -- Hockey
+  ('hockey', 'text', 'About',
+   '{"body":"Our Hockey program gives athletes the ice time and coaching they need to develop at an elite level."}',
+   0),
+  ('hockey', 'highlights', 'Program Highlights',
+   '{"items":["Weekly on-ice training sessions","Qualified and experienced coaching staff","Partner program: Xtreme Hockey"]}',
+   1),
+
+  -- Cheerleading
+  ('cheerleading', 'text', 'About',
+   '{"body":"Our Cheerleading program combines athleticism, artistry, and teamwork. Athletes train weekly with qualified coaches in a supportive environment that nurtures both sport performance and personal growth."}',
+   0),
+  ('cheerleading', 'highlights', 'Program Highlights',
+   '{"items":["Weekly practice with certified coaches","Strength and conditioning included","Partner program: Cheer Sport Sharks"]}',
+   1),
+
+  -- Volleyball
+  ('volleyball', 'text', 'About',
+   '{"body":"Partnered with The Court House, our Volleyball program gives dedicated athletes weekly court time and expert coaching to develop their skills at a high level."}',
+   0),
+  ('volleyball', 'highlights', 'Program Highlights',
+   '{"items":["Weekly training with experienced coaches","Technical and tactical skill development","Partner facility: The Court House"]}',
+   1),
+
+  -- Baseball
+  ('baseball', 'text', 'About',
+   '{"body":"In partnership with Premier Sports Academy, our Baseball program provides a structured weekly training environment for players who want to take their game to the next level."}',
+   0),
+  ('baseball', 'highlights', 'Program Highlights',
+   '{"items":["Weekly hitting, fielding, and pitching sessions","Coaching from Premier Sports Academy staff","Focus on fundamentals and game IQ"]}',
+   1),
+
+  -- Basketball
+  ('basketball', 'text', 'About',
+   '{"body":"Our Basketball program, developed in partnership with CE23 Basketball, offers weekly training sessions focused on skill development, team play, and athletic growth."}',
+   0),
+  ('basketball', 'highlights', 'Program Highlights',
+   '{"items":["Weekly skill development sessions","Partner program: CE23 Basketball","Individual and team-based coaching"]}',
+   1),
+
+  -- Boxing
+  ('boxing', 'text', 'About',
+   '{"body":"Our Boxing program develops discipline, mental toughness, and physical conditioning in a safe and structured environment. Athletes train weekly under qualified coaches."}',
+   0),
+  ('boxing', 'highlights', 'Program Highlights',
+   '{"items":["Weekly training with qualified boxing coaches","Focus on technique, fitness, and mental strength","Partner program: NL Boxing"]}',
+   1),
+
+  -- Dance
+  ('dance', 'text', 'About',
+   '{"body":"Partnered with The Dance Academy, our Dance program allows aspiring dancers to train weekly in a professional environment."}',
+   0),
+  ('dance', 'highlights', 'Program Highlights',
+   '{"items":["Weekly dance training with professional instructors","Partner facility: The Dance Academy","Multiple styles and disciplines available"]}',
+   1),
+
+  -- Soccer
+  ('soccer', 'text', 'About',
+   '{"body":"Our Soccer program provides athletes with weekly training sessions focused on technical development, tactical understanding, and physical conditioning."}',
+   0),
+  ('soccer', 'highlights', 'Program Highlights',
+   '{"items":["Weekly technical and tactical training","Conditioning and game preparation","Partner program: Pro Touch Academy"]}',
+   1)
+
+ON CONFLICT DO NOTHING;
+
 -- ─── SEED: Schools ──────────────────────────────────────────────────────────
 -- Run once after creating the table. Safe to re-run if the table is empty.
 

@@ -371,7 +371,7 @@ export default function ContactModal({
                   <div className="flex items-center justify-between gap-3 pt-1 border-t border-white/10 mt-1">
                     <p className="text-[10px] text-gray-700">
                       Sent to{" "}
-                      <span className="text-gray-500">info@academiesae.com</span>
+                      <span className="text-gray-500">info@saeacademynl.com</span>
                       {" "}· Copy to your email
                     </p>
                     <button
