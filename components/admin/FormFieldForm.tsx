@@ -6,6 +6,8 @@ import type { FormField } from "@/components/DynamicForm";
 export interface FormFieldFormProps {
   formId: string;
   existing?: FormField;
+  /** Field type to use when creating a new field (ignored on edit). */
+  defaultFieldType?: FormField["field_type"];
   onSaved: (field: FormField) => void;
   onCancel: () => void;
 }
@@ -34,18 +36,18 @@ function Label({ htmlFor, children }: { htmlFor?: string; children: React.ReactN
   );
 }
 
-export default function FormFieldForm({ formId, existing, onSaved, onCancel }: FormFieldFormProps) {
+export default function FormFieldForm({ formId, existing, defaultFieldType, onSaved, onCancel }: FormFieldFormProps) {
   const isEdit = !!existing;
 
-  const [label, setLabel]           = useState(existing?.label ?? "");
+  const [label, setLabel]             = useState(existing?.label ?? "");
   const [placeholder, setPlaceholder] = useState(existing?.placeholder ?? "");
-  const [required, setRequired]     = useState(existing?.required ?? false);
-  const [options, setOptions]       = useState<string[]>(existing?.options ?? [""]);
-  const [sortOrder, setSortOrder]   = useState(existing?.sort_order ?? 0);
-  const [saving, setSaving]         = useState(false);
-  const [error, setError]           = useState<string | null>(null);
+  const [required, setRequired]       = useState(existing?.required ?? false);
+  const [options, setOptions]         = useState<string[]>(existing?.options ?? [""]);
+  const [sortOrder, setSortOrder]     = useState(existing?.sort_order ?? 0);
+  const [saving, setSaving]           = useState(false);
+  const [error, setError]             = useState<string | null>(null);
 
-  const fieldType = existing?.field_type ?? "text";
+  const fieldType = existing?.field_type ?? defaultFieldType ?? "text";
   const isSelect   = fieldType === "select";
   const isCheckbox = fieldType === "checkbox";
   const isRadio    = fieldType === "radio";

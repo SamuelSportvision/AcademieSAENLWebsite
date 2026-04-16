@@ -102,10 +102,11 @@ function FieldDrawer({
           {step === "pick" && (
             <FieldTypePicker onSelect={(type) => { setPickedType(type); setStep("form"); }} />
           )}
-          {step === "form" && syntheticField && (
+          {step === "form" && (
             <FormFieldForm
               formId={formId}
               existing={editField ?? undefined}
+              defaultFieldType={pickedType ?? undefined}
               onSaved={handleSaved}
               onCancel={onClose}
             />
