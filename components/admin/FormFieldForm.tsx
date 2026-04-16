@@ -19,6 +19,7 @@ const FIELD_TYPE_LABELS: Record<FormField["field_type"], string> = {
   textarea: "Long Text",
   select:   "Dropdown",
   checkbox: "Checkboxes",
+  radio:    "Radio Buttons",
 };
 
 function fieldClass(extra = "") {
@@ -45,8 +46,10 @@ export default function FormFieldForm({ formId, existing, onSaved, onCancel }: F
   const [error, setError]           = useState<string | null>(null);
 
   const fieldType = existing?.field_type ?? "text";
-  const isSelect  = fieldType === "select";
+  const isSelect   = fieldType === "select";
   const isCheckbox = fieldType === "checkbox";
+  const isRadio    = fieldType === "radio";
+  const hasOptions = isSelect || isCheckbox || isRadio;
 
   /* ── Options list management (for select / checkbox) ── */
   function updateOption(index: number, value: string) {
@@ -58,7 +61,7 @@ export default function FormFieldForm({ formId, existing, onSaved, onCancel }: F
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     if (!label.trim()) { setError("Label is required."); return; }
-    if ((isSelect || isCheckbox) && options.filter((o) => o.trim()).length === 0) {
+    if (hasOptions && options.filter((o) => o.trim()).length === 0) {
       setError("Add at least one option.");
       return;
     }
@@ -71,7 +74,7 @@ export default function FormFieldForm({ formId, existing, onSaved, onCancel }: F
       placeholder: placeholder.trim() || null,
       required,
       sort_order: sortOrder,
-      options: (isSelect || isCheckbox) ? options.filter((o) => o.trim()) : null,
+      options: hasOptions ? options.filter((o) => o.trim()) : null,
     };
 
     try {
@@ -133,7 +136,7 @@ export default function FormFieldForm({ formId, existing, onSaved, onCancel }: F
       </div>
 
       {/* Placeholder — not shown for checkbox */}
-      {!isCheckbox && (
+      {!isCheckbox && !isRadio && (
         <div className="flex flex-col gap-1.5">
           <Label htmlFor="field_placeholder">
             Placeholder Text <span className="text-gray-700 normal-case tracking-normal font-normal">(optional)</span>
@@ -150,14 +153,11 @@ export default function FormFieldForm({ formId, existing, onSaved, onCancel }: F
             }
             className={fieldClass("w-full")}
           />
-          {isCheckbox && (
-            <p className="text-[10px] text-gray-600">Shown as the checkbox label text (if different from the question).</p>
-          )}
         </div>
       )}
 
-      {/* Options list for select / checkbox */}
-      {(isSelect || isCheckbox) && (
+      {/* Options list for select / checkbox group / radio */}
+      {hasOptions && (
         <div className="flex flex-col gap-3">
           <Label>Options</Label>
           {options.map((opt, i) => (

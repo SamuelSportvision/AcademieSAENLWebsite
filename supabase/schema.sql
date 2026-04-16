@@ -301,7 +301,7 @@ CREATE TABLE IF NOT EXISTS form_fields (
   id          UUID        DEFAULT gen_random_uuid() PRIMARY KEY,
   form_id     UUID        NOT NULL REFERENCES forms(id) ON DELETE CASCADE,
   field_type  TEXT        NOT NULL
-                CHECK (field_type IN ('text','email','phone','number','date','textarea','select','checkbox')),
+                CHECK (field_type IN ('text','email','phone','number','date','textarea','select','checkbox','radio')),
   label       TEXT        NOT NULL,
   placeholder TEXT,
   options     JSONB,        -- string[] for select dropdowns
@@ -328,3 +328,9 @@ ALTER TABLE form_submissions ENABLE ROW LEVEL SECURITY;
 CREATE POLICY "Public insert submissions"          ON form_submissions FOR INSERT WITH CHECK (true);
 CREATE POLICY "Authenticated read submissions"     ON form_submissions FOR SELECT USING (auth.role() = 'authenticated');
 CREATE POLICY "Authenticated delete submissions"   ON form_submissions FOR DELETE USING (auth.role() = 'authenticated');
+
+-- ─── SCHEMA UPDATES (safe to re-run) ─────────────────────────────────────────
+-- Adds radio button field type. Run this if the forms tables already exist.
+ALTER TABLE form_fields DROP CONSTRAINT IF EXISTS form_fields_field_type_check;
+ALTER TABLE form_fields ADD CONSTRAINT form_fields_field_type_check
+  CHECK (field_type IN ('text','email','phone','number','date','textarea','select','checkbox','radio'));

@@ -22,7 +22,7 @@ interface FormRow {
 const FIELD_TYPE_LABELS: Record<FormField["field_type"], string> = {
   text: "Short Text", email: "Email", phone: "Phone",
   number: "Number", date: "Date", textarea: "Long Text",
-  select: "Dropdown", checkbox: "Checkboxes",
+  select: "Dropdown", checkbox: "Checkboxes", radio: "Radio Buttons",
 };
 
 const FIELD_BADGE: Record<FormField["field_type"], string> = {
@@ -34,6 +34,7 @@ const FIELD_BADGE: Record<FormField["field_type"], string> = {
   textarea: "bg-amber-900/30 text-amber-400 border-amber-800/40",
   select:   "bg-emerald-900/30 text-emerald-400 border-emerald-800/40",
   checkbox: "bg-pink-900/30 text-pink-400 border-pink-800/40",
+  radio:    "bg-orange-900/30 text-orange-400 border-orange-800/40",
 };
 
 /* ─── Drawer (type picker → field form) ─────────────────────────────────────── */

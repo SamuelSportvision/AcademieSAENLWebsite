@@ -54,12 +54,31 @@ function CheckboxPreview() {
   return (
     <svg viewBox="0 0 160 70" className="w-full h-full" aria-hidden>
       <rect width="160" height="70" fill="#111" />
-      {[18, 36, 54].map((y, i) => (
+      {[14, 32, 50].map((y, i) => (
         <g key={y}>
           <rect x="12" y={y} width="14" height="14" rx="3"
             fill={i === 0 ? "#C9A84C" : "#1a1a1a"} stroke={i === 0 ? "#C9A84C" : "#333"} strokeWidth="1" />
           {i === 0 && <text x="19" y={y + 10} textAnchor="middle" fill="#000" fontSize="9" fontWeight="bold">✓</text>}
-          <rect x="32" y={y + 4} width={i === 0 ? 80 : 60} height="4" rx="2" fill="#444" />
+          {i === 1 && <text x="19" y={y + 10} textAnchor="middle" fill="#000" fontSize="9" fontWeight="bold">✓</text>}
+          {i === 1 && <rect x="12" y={y} width="14" height="14" rx="3" fill="#C9A84C" stroke="#C9A84C" strokeWidth="1" />}
+          {i === 1 && <text x="19" y={y + 10} textAnchor="middle" fill="#000" fontSize="9" fontWeight="bold">✓</text>}
+          <rect x="32" y={y + 4} width={i === 2 ? 55 : 75} height="4" rx="2" fill="#444" />
+        </g>
+      ))}
+    </svg>
+  );
+}
+
+function RadioPreview() {
+  return (
+    <svg viewBox="0 0 160 70" className="w-full h-full" aria-hidden>
+      <rect width="160" height="70" fill="#111" />
+      {[14, 32, 50].map((y, i) => (
+        <g key={y}>
+          <circle cx="19" cy={y + 7} r="7"
+            fill="#1a1a1a" stroke={i === 1 ? "#C9A84C" : "#333"} strokeWidth="1.5" />
+          {i === 1 && <circle cx="19" cy={y + 7} r="3.5" fill="#C9A84C" />}
+          <rect x="32" y={y + 4} width={i === 0 ? 70 : i === 2 ? 50 : 85} height="4" rx="2" fill="#444" />
         </g>
       ))}
     </svg>
@@ -76,7 +95,8 @@ const OPTIONS: FieldTypeOption[] = [
   { value: "date",     label: "Date",         description: "Date picker",                  preview: <SingleLinePreview label="📅" /> },
   { value: "textarea", label: "Long Text",    description: "Multi-line text answer",       preview: <TextareaPreview /> },
   { value: "select",   label: "Dropdown",     description: "Select one from a list",       preview: <SelectPreview /> },
-  { value: "checkbox", label: "Checkboxes",   description: "One or more checkable items",  preview: <CheckboxPreview /> },
+  { value: "checkbox", label: "Checkboxes",     description: "Select one or more from a list", preview: <CheckboxPreview /> },
+  { value: "radio",    label: "Radio Buttons",  description: "Select exactly one from a list", preview: <RadioPreview /> },
 ];
 
 /* ─── Component ───────────────────────────────────────────────────────────── */
