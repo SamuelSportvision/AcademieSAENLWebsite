@@ -18,11 +18,13 @@ CREATE TABLE IF NOT EXISTS schedule_events (
 ALTER TABLE schedule_events ENABLE ROW LEVEL SECURITY;
 
 -- Anyone can read the schedule (public calendar)
+DROP POLICY IF EXISTS "Public read access" ON schedule_events;
 CREATE POLICY "Public read access"
   ON schedule_events FOR SELECT
   USING (true);
 
 -- Only authenticated users can write
+DROP POLICY IF EXISTS "Authenticated write access" ON schedule_events;
 CREATE POLICY "Authenticated write access"
   ON schedule_events FOR ALL
   USING (auth.role() = 'authenticated');
@@ -76,10 +78,12 @@ CREATE TABLE IF NOT EXISTS faqs (
 
 ALTER TABLE faqs ENABLE ROW LEVEL SECURITY;
 
+DROP POLICY IF EXISTS "Public read faqs" ON faqs;
 CREATE POLICY "Public read faqs"
   ON faqs FOR SELECT
   USING (true);
 
+DROP POLICY IF EXISTS "Authenticated write faqs" ON faqs;
 CREATE POLICY "Authenticated write faqs"
   ON faqs FOR ALL
   USING (auth.role() = 'authenticated');
@@ -97,10 +101,12 @@ CREATE TABLE IF NOT EXISTS schools (
 
 ALTER TABLE schools ENABLE ROW LEVEL SECURITY;
 
+DROP POLICY IF EXISTS "Public read schools" ON schools;
 CREATE POLICY "Public read schools"
   ON schools FOR SELECT
   USING (true);
 
+DROP POLICY IF EXISTS "Authenticated write schools" ON schools;
 CREATE POLICY "Authenticated write schools"
   ON schools FOR ALL
   USING (auth.role() = 'authenticated');
@@ -130,10 +136,12 @@ CREATE TABLE IF NOT EXISTS sport_page_sections (
 
 ALTER TABLE sport_page_sections ENABLE ROW LEVEL SECURITY;
 
+DROP POLICY IF EXISTS "Public read sport sections" ON sport_page_sections;
 CREATE POLICY "Public read sport sections"
   ON sport_page_sections FOR SELECT
   USING (true);
 
+DROP POLICY IF EXISTS "Authenticated write sport sections" ON sport_page_sections;
 CREATE POLICY "Authenticated write sport sections"
   ON sport_page_sections FOR ALL
   USING (auth.role() = 'authenticated');
@@ -286,6 +294,8 @@ CREATE TABLE IF NOT EXISTS forms (
 );
 
 ALTER TABLE forms ENABLE ROW LEVEL SECURITY;
+DROP POLICY IF EXISTS "Public read active forms"  ON forms;
+DROP POLICY IF EXISTS "Authenticated write forms" ON forms;
 CREATE POLICY "Public read active forms"  ON forms FOR SELECT USING (true);
 CREATE POLICY "Authenticated write forms" ON forms FOR ALL USING (auth.role() = 'authenticated');
 
@@ -311,6 +321,8 @@ CREATE TABLE IF NOT EXISTS form_fields (
 );
 
 ALTER TABLE form_fields ENABLE ROW LEVEL SECURITY;
+DROP POLICY IF EXISTS "Public read form fields"        ON form_fields;
+DROP POLICY IF EXISTS "Authenticated write form fields" ON form_fields;
 CREATE POLICY "Public read form fields"        ON form_fields FOR SELECT USING (true);
 CREATE POLICY "Authenticated write form fields" ON form_fields FOR ALL USING (auth.role() = 'authenticated');
 
@@ -325,6 +337,9 @@ CREATE TABLE IF NOT EXISTS form_submissions (
 );
 
 ALTER TABLE form_submissions ENABLE ROW LEVEL SECURITY;
+DROP POLICY IF EXISTS "Public insert submissions"        ON form_submissions;
+DROP POLICY IF EXISTS "Authenticated read submissions"   ON form_submissions;
+DROP POLICY IF EXISTS "Authenticated delete submissions" ON form_submissions;
 CREATE POLICY "Public insert submissions"          ON form_submissions FOR INSERT WITH CHECK (true);
 CREATE POLICY "Authenticated read submissions"     ON form_submissions FOR SELECT USING (auth.role() = 'authenticated');
 CREATE POLICY "Authenticated delete submissions"   ON form_submissions FOR DELETE USING (auth.role() = 'authenticated');
@@ -334,3 +349,55 @@ CREATE POLICY "Authenticated delete submissions"   ON form_submissions FOR DELET
 ALTER TABLE form_fields DROP CONSTRAINT IF EXISTS form_fields_field_type_check;
 ALTER TABLE form_fields ADD CONSTRAINT form_fields_field_type_check
   CHECK (field_type IN ('text','email','phone','number','date','textarea','select','checkbox','radio'));
+
+-- ─── SITE SETTINGS ───────────────────────────────────────────────────────────
+-- Key/value bag for global site copy and links (contact email, registration
+-- URL, mailing list URL, home-page hero copy, stats, etc.).
+-- Each value is JSONB so we can store strings, numbers, and small structured
+-- objects/arrays under a single schema.
+
+CREATE TABLE IF NOT EXISTS site_settings (
+  key        TEXT        PRIMARY KEY,
+  value      JSONB       NOT NULL,
+  updated_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+ALTER TABLE site_settings ENABLE ROW LEVEL SECURITY;
+
+DROP POLICY IF EXISTS "Public read site settings" ON site_settings;
+CREATE POLICY "Public read site settings"
+  ON site_settings FOR SELECT
+  USING (true);
+
+DROP POLICY IF EXISTS "Authenticated write site settings" ON site_settings;
+CREATE POLICY "Authenticated write site settings"
+  ON site_settings FOR ALL
+  USING (auth.role() = 'authenticated');
+
+DROP TRIGGER IF EXISTS site_settings_updated_at ON site_settings;
+CREATE TRIGGER site_settings_updated_at
+  BEFORE UPDATE ON site_settings
+  FOR EACH ROW EXECUTE FUNCTION update_updated_at();
+
+-- Seed defaults so the public site renders identically before the admin
+-- has touched anything. Re-running is safe (ON CONFLICT DO NOTHING).
+INSERT INTO site_settings (key, value) VALUES
+  ('contact_email',           '"info@saeacademynl.com"'),
+  ('registration_url',        '"https://go.teamsnap.com/forms/518037"'),
+  ('mailing_list_url',        '"https://mailchi.mp/saeacademynl/email-sign-up"'),
+  ('mailing_list_eyebrow',    '"Stay in the loop"'),
+  ('mailing_list_heading',    '"Join our mailing list"'),
+  ('mailing_list_subheading', '"Be among the first to secure a spot in the SAE Academy''s Elite After-School Development Program."'),
+  ('home_hero', '{
+    "eyebrow": "Newfoundland Sport Education Program",
+    "title_lines": ["Elite After-School", "Development", "For Athletes Who Want More."],
+    "subtitle": "A premium 3:00–5:00 PM solution for families. School pickup, transportation, 1.5 hours of structured instruction, and elite coaching — all in one program.",
+    "cta_primary":   { "label": "Explore Programs",  "href": "/sports" },
+    "cta_secondary": { "label": "Join the Waitlist", "href": "https://go.teamsnap.com/forms/518037" }
+  }'),
+  ('home_stats', '[
+    { "value": "8",    "label": "Disciplines" },
+    { "value": "45",   "label": "Eligible Schools" },
+    { "value": "1.5h", "label": "Daily Development" }
+  ]')
+ON CONFLICT (key) DO NOTHING;

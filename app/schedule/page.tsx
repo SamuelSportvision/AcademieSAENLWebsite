@@ -5,7 +5,7 @@ import ScheduleCalendar from "@/components/ScheduleCalendar";
 export const metadata: Metadata = {
   title: "Schedule | SAE Academy",
   description:
-    "View the weekly training schedule for all SAE Academy programs — hockey, volleyball, basketball, and more.",
+    "View the structured weekly development schedule for all SAE Academy programs — hockey, volleyball, basketball, and more.",
 };
 
 async function getEvents(): Promise<ScheduleEvent[]> {
@@ -73,7 +73,7 @@ export default async function SchedulePage() {
               Ready to join?
             </p>
             <p className="text-gray-500 text-sm mt-1">
-              Register for the program that fits your schedule.
+              Save your spot in the program that fits your schedule.
             </p>
           </div>
           <a
@@ -82,7 +82,7 @@ export default async function SchedulePage() {
             rel="noopener noreferrer"
             className="bg-[#C9A84C] text-black font-black text-sm uppercase tracking-widest px-8 py-4 hover:bg-yellow-400 transition-colors whitespace-nowrap"
           >
-            Register Now
+            Join the Waitlist
           </a>
         </div>
       </section>

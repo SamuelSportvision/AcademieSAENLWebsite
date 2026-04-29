@@ -1,7 +1,12 @@
 import Link from "next/link";
 import Image from "next/image";
+import type { SiteSettings } from "@/lib/site-settings";
 
-export default function Footer() {
+interface FooterProps {
+  settings: SiteSettings;
+}
+
+export default function Footer({ settings }: FooterProps) {
   return (
     <footer className="bg-[#0f0f0f] border-t border-white/10 mt-auto">
       <div className="max-w-7xl mx-auto px-5 py-14 grid grid-cols-1 sm:grid-cols-3 gap-10">
@@ -15,7 +20,7 @@ export default function Footer() {
             className="w-16 h-16 object-contain rounded-full"
           />
           <p className="text-gray-500 text-xs leading-relaxed max-w-[220px]">
-            Developing the next generation of athletes and artists in Newfoundland through daily, high-level programming.
+            Structured, high-level after-school development for Newfoundland athletes and artists.
           </p>
         </div>
 
@@ -51,10 +56,10 @@ export default function Footer() {
           </p>
           <p className="text-gray-600 text-xs mb-2 uppercase tracking-wider">For inquiries:</p>
           <a
-            href="mailto:info@saeacademynl.com"
+            href={`mailto:${settings.contact_email}`}
             className="text-white text-sm font-bold hover:text-[#C9A84C] transition-colors break-all"
           >
-            info@saeacademynl.com
+            {settings.contact_email}
           </a>
           <p className="text-gray-700 text-[10px] mt-8 uppercase tracking-wider">
             &copy; {new Date().getFullYear()} Sports, Arts, Education Academy
@@ -67,17 +72,17 @@ export default function Footer() {
         <div className="max-w-7xl mx-auto px-5 py-10 flex flex-col sm:flex-row items-center justify-between gap-6">
           <div>
             <p className="text-[#C9A84C] text-[10px] font-bold uppercase tracking-[0.3em] mb-1">
-              Stay in the loop
+              {settings.mailing_list_eyebrow}
             </p>
             <p className="text-white text-sm font-bold">
-              Join our mailing list
+              {settings.mailing_list_heading}
             </p>
             <p className="text-gray-500 text-xs mt-1 max-w-xs">
-              Be among the first to secure a spot in the SAE Academy&apos;s Elite After-School Development Program.
+              {settings.mailing_list_subheading}
             </p>
           </div>
           <a
-            href="https://mailchi.mp/saeacademynl/email-sign-up"
+            href={settings.mailing_list_url}
             target="_blank"
             rel="noopener noreferrer"
             className="shrink-0 inline-flex items-center gap-2 bg-[#C9A84C] hover:bg-[#b8933d] text-black text-xs font-bold uppercase tracking-widest px-6 py-3 transition-colors"

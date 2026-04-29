@@ -13,7 +13,12 @@ const links = [
   { href: "/faq", label: "FAQ" },
 ];
 
-export default function Navbar() {
+interface NavbarProps {
+  /** Registration URL for the "Join the Waitlist" CTA (set in admin → Settings). */
+  registrationUrl: string;
+}
+
+export default function Navbar({ registrationUrl }: NavbarProps) {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
@@ -86,12 +91,12 @@ export default function Navbar() {
         {/* CTA — far right (desktop) + hamburger (mobile) */}
         <div className="flex items-center gap-3">
           <Link
-            href="https://go.teamsnap.com/forms/518037"
+            href={registrationUrl}
             target="_blank"
             rel="noopener noreferrer"
             className="hidden md:inline-block bg-[#C9A84C] text-black font-black text-xs uppercase tracking-widest px-5 py-2.5 rounded-full hover:bg-yellow-400 transition-colors whitespace-nowrap"
           >
-            Register Now
+            Join the Waitlist
           </Link>
 
           {/* Mobile hamburger */}
@@ -140,13 +145,13 @@ export default function Navbar() {
               </Link>
             ))}
             <Link
-              href="https://go.teamsnap.com/forms/518037"
+              href={registrationUrl}
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => setOpen(false)}
               className="mt-8 bg-[#C9A84C] text-black text-center font-black uppercase tracking-wider px-4 py-4 text-sm rounded-full"
             >
-              Register Now
+              Join the Waitlist
             </Link>
           </nav>
         </div>

@@ -138,7 +138,7 @@ export default async function SportDetailPage({ params }: Props) {
           {/* Right: CTAs + other programs */}
           <div className="flex flex-col gap-3">
             <p className="text-[#C9A84C] text-[10px] font-bold uppercase tracking-[0.3em] mb-2">
-              Register
+              Save Your Spot
             </p>
             <Link
               href={sport.registrationUrl}
@@ -146,7 +146,7 @@ export default async function SportDetailPage({ params }: Props) {
               rel="noopener noreferrer"
               className="bg-[#C8102E] text-white font-black text-sm uppercase tracking-widest px-6 py-5 text-center hover:bg-red-700 transition-colors"
             >
-              Register on TeamSnap
+              Join the Waitlist
             </Link>
             {sport.partnerUrl && (
               <Link

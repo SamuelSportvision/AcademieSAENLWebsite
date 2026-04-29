@@ -24,7 +24,7 @@ export const sports: Sport[] = [
     description:
       "Our Hockey program gives athletes the ice time and coaching they need to develop at an elite level.",
     highlights: [
-      "Weekly on-ice training sessions",
+      "1.5 hours of elite on-ice development each week",
       "Qualified and experienced coaching staff",
       "Partner program: Xtreme Hockey",
     ],
@@ -41,7 +41,7 @@ export const sports: Sport[] = [
     description:
       "Our Cheerleading program combines athleticism, artistry, and teamwork. Athletes train weekly with qualified coaches in a supportive environment that nurtures both sport performance and personal growth.",
     highlights: [
-      "Weekly practice with certified coaches",
+      "Structured weekly development with certified coaches",
       "Strength and conditioning included",
       "Partner program: Cheer Sport Sharks",
     ],
@@ -56,9 +56,9 @@ export const sports: Sport[] = [
     registrationUrl: TEAMSNAP_URL,
     tagline: "Elevate your game on and off the court.",
     description:
-      "Partnered with The Court House, our Volleyball program gives dedicated athletes weekly court time and expert coaching to develop their skills at a high level.",
+      "Partnered with The Court House, our Volleyball program gives dedicated athletes 1.5 hours of elite court development each week with expert coaching.",
     highlights: [
-      "Weekly training with experienced coaches",
+      "1.5 hours of elite training each week with experienced coaches",
       "Technical and tactical skill development",
       "Partner facility: The Court House",
     ],
@@ -73,9 +73,9 @@ export const sports: Sport[] = [
     registrationUrl: TEAMSNAP_URL,
     tagline: "Develop the fundamentals. Excel at every level.",
     description:
-      "In partnership with Premier Sports Academy, our Baseball program provides a structured weekly training environment for players who want to take their game to the next level.",
+      "In partnership with Premier Sports Academy, our Baseball program delivers structured weekly development for players who want to take their game to the next level.",
     highlights: [
-      "Weekly hitting, fielding, and pitching sessions",
+      "1.5 hours of elite hitting, fielding, and pitching each week",
       "Coaching from Premier Sports Academy staff",
       "Focus on fundamentals and game IQ",
     ],
@@ -90,9 +90,9 @@ export const sports: Sport[] = [
     registrationUrl: TEAMSNAP_URL,
     tagline: "Play every day. Grow every game.",
     description:
-      "Our Basketball program, developed in partnership with CE23 Basketball, offers weekly training sessions focused on skill development, team play, and athletic growth.",
+      "Our Basketball program, developed in partnership with CE23 Basketball, delivers structured weekly development focused on skill, team play, and athletic growth.",
     highlights: [
-      "Weekly skill development sessions",
+      "1.5 hours of elite skill development each week",
       "Partner program: CE23 Basketball",
       "Individual and team-based coaching",
     ],
@@ -107,9 +107,9 @@ export const sports: Sport[] = [
     registrationUrl: TEAMSNAP_URL,
     tagline: "Discipline, focus, and dedication — every day.",
     description:
-      "Our Boxing program develops discipline, mental toughness, and physical conditioning in a safe and structured environment. Athletes train weekly under qualified coaches.",
+      "Our Boxing program develops discipline, mental toughness, and physical conditioning in a safe and structured environment. Athletes get 1.5 hours of elite training each week under qualified coaches.",
     highlights: [
-      "Weekly training with qualified boxing coaches",
+      "1.5 hours of elite training each week with qualified boxing coaches",
       "Focus on technique, fitness, and mental strength",
       "Partner program: NL Boxing",
     ],
@@ -124,9 +124,9 @@ export const sports: Sport[] = [
     registrationUrl: TEAMSNAP_URL,
     tagline: "Express yourself. Train like a professional.",
     description:
-      "Partnered with The Dance Academy, our Dance program allows aspiring dancers to train weekly in a professional environment.",
+      "Partnered with The Dance Academy, our Dance program gives aspiring dancers 1.5 hours of elite training each week in a professional environment.",
     highlights: [
-      "Weekly dance training with professional instructors",
+      "1.5 hours of elite training each week with professional instructors",
       "Partner facility: The Dance Academy",
       "Multiple styles and disciplines available",
     ],
@@ -141,14 +141,14 @@ export const sports: Sport[] = [
     registrationUrl: TEAMSNAP_URL,
     tagline: "Train harder. Play smarter.",
     description:
-      "Our Soccer program provides athletes with weekly training sessions focused on technical development, tactical understanding, and physical conditioning.",
+      "Our Soccer program delivers structured weekly development focused on technical skill, tactical understanding, and physical conditioning.",
     highlights: [
-      "Weekly technical and tactical training",
+      "1.5 hours of elite technical and tactical training each week",
       "Conditioning and game preparation",
       "Partner program: Pro Touch Academy",
     ],
     accentColor: "#22C55E",
-    image: "/images/soccer-hero.png",
+    image: "/images/soccer-coaching.png",
   },
 ];
 

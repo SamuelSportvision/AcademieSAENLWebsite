@@ -3,9 +3,16 @@ import Link from "next/link";
 import { sports } from "@/data/sports";
 import { schools } from "@/data/schools";
 import ContactModal from "@/components/ContactModal";
+import { getSiteSettings } from "@/lib/site-settings";
 
-export default function HomePage() {
+function isExternal(href: string) {
+  return /^https?:\/\//i.test(href);
+}
+
+export default async function HomePage() {
   const featuredSchools = schools.slice(0, 6);
+  const settings = await getSiteSettings();
+  const { home_hero: hero, home_stats: stats, contact_email, registration_url } = settings;
 
   return (
     <>
@@ -28,53 +35,55 @@ export default function HomePage() {
 
         <div className="relative z-10 w-full max-w-7xl mx-auto px-5 pb-16 pt-32">
           <p className="text-[#C9A84C] text-xs font-bold uppercase tracking-[0.35em] mb-5">
-            Newfoundland Sport Education Program
+            {hero.eyebrow}
           </p>
-          <h1 className="font-black uppercase text-white leading-none mb-6">
-            <span className="block text-[clamp(3rem,10vw,7rem)]">Do More.</span>
-            <span className="block text-[clamp(3rem,10vw,7rem)] text-[#C9A84C]">Achieve More.</span>
+          <h1 className="font-black uppercase text-white leading-[0.95] tracking-tight mb-6 max-w-4xl">
+            <span className="block text-[clamp(2.25rem,7vw,5.25rem)]">{hero.title_lines[0]}</span>
+            <span className="block text-[clamp(2.25rem,7vw,5.25rem)]">{hero.title_lines[1]}</span>
+            <span className="block text-[clamp(2.25rem,7vw,5.25rem)] text-[#C9A84C]">{hero.title_lines[2]}</span>
           </h1>
           <p className="text-gray-300 text-base sm:text-lg max-w-xl leading-relaxed mb-8">
-            SAE Academy gives athletes and artists an elite afterschool program with qualified coaching, and weekly training time to reach their full potential.
+            {hero.subtitle}
           </p>
           <div className="flex flex-col sm:flex-row gap-3">
             <Link
-              href="/sports"
+              href={hero.cta_primary.href}
+              {...(isExternal(hero.cta_primary.href) ? { target: "_blank", rel: "noopener noreferrer" } : {})}
               className="bg-[#C8102E] text-white font-black text-sm uppercase tracking-widest px-8 py-4 hover:bg-red-700 transition-colors text-center"
             >
-              Explore Programs
+              {hero.cta_primary.label}
             </Link>
             <Link
-              href="https://go.teamsnap.com/forms/518037"
-              target="_blank"
-              rel="noopener noreferrer"
+              href={hero.cta_secondary.href}
+              {...(isExternal(hero.cta_secondary.href) ? { target: "_blank", rel: "noopener noreferrer" } : {})}
               className="border-2 border-white text-white font-black text-sm uppercase tracking-widest px-8 py-4 hover:bg-white hover:text-black transition-colors text-center"
             >
-              Register Now
+              {hero.cta_secondary.label}
             </Link>
           </div>
         </div>
       </section>
 
       {/* ── STATS BAR ── */}
-      <section className="bg-[#C9A84C]">
-        <div className="max-w-7xl mx-auto px-5 py-5 grid grid-cols-3 divide-x divide-black/20">
-          {[
-            { value: "8", label: "Disciplines" },
-            { value: "45", label: "Eligible Schools" },
-            { value: "Weekly", label: "Training" },
-          ].map((stat) => (
-            <div key={stat.label} className="flex flex-col items-center py-1 gap-0.5">
-              <span className="font-black text-2xl sm:text-3xl text-black uppercase">
-                {stat.value}
-              </span>
-              <span className="text-[10px] sm:text-xs font-bold uppercase tracking-[0.2em] text-black/60 text-center">
-                {stat.label}
-              </span>
-            </div>
-          ))}
-        </div>
-      </section>
+      {stats.length > 0 && (
+        <section className="bg-[#C9A84C]">
+          <div
+            className="max-w-7xl mx-auto px-5 py-5 grid divide-x divide-black/20"
+            style={{ gridTemplateColumns: `repeat(${stats.length}, minmax(0, 1fr))` }}
+          >
+            {stats.map((stat) => (
+              <div key={stat.label} className="flex flex-col items-center py-1 gap-0.5">
+                <span className="font-black text-2xl sm:text-3xl text-black uppercase">
+                  {stat.value}
+                </span>
+                <span className="text-[10px] sm:text-xs font-bold uppercase tracking-[0.2em] text-black/60 text-center">
+                  {stat.label}
+                </span>
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
 
       {/* ── BUILDING CHAMPIONS ── 2-col with photo (Tenica-style) */}
       <section className="bg-[#0f0f0f] py-0 overflow-hidden">
@@ -98,10 +107,10 @@ export default function HomePage() {
               Building Champions,<br />One Session at a Time.
             </h2>
             <p className="text-gray-300 text-base leading-relaxed mb-4">
-              SAE Academy is an elite afterschool program built on a single belief: young athletes and artists deserve the time to train every single week. We partner with established sports organizations across Newfoundland to make that possible.
+              SAE Academy is an Elite After-School Development Program built on a single belief: young athletes and artists deserve the time to train every single week. We partner with established sports organizations across Newfoundland to make that possible.
             </p>
             <p className="text-gray-500 text-sm leading-relaxed mb-8">
-              Proper facilities, highly qualified coaches, and weekly training — all in one program.
+              Premium facilities, elite coaches, and structured weekly development — all in one program.
             </p>
             <Link
               href="/sports"
@@ -109,6 +118,75 @@ export default function HomePage() {
             >
               Our Programs
             </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* ── WHAT'S INCLUDED / $62.50 VALUE ── */}
+      <section className="bg-[#111111] py-24 px-5 border-t border-white/10">
+        <div className="max-w-7xl mx-auto">
+          <div className="flex flex-col lg:flex-row gap-14 items-start">
+            {/* Left: price card + headline */}
+            <div className="flex-1">
+              <p className="text-[#C9A84C] text-xs font-bold uppercase tracking-[0.3em] mb-4">
+                What You Get For
+              </p>
+              <h2 className="font-black text-5xl sm:text-6xl uppercase text-white leading-[0.95] mb-6">
+                $62.50<span className="text-[#C9A84C]">/Day</span>
+              </h2>
+              <p className="text-gray-400 text-base leading-relaxed max-w-prose mb-8">
+                You&apos;re paying for far more than a practice. Every session is a complete, end-to-end after-school solution — designed so families don&apos;t have to choose between elite development and a manageable weekday routine.
+              </p>
+              <div className="inline-flex items-center gap-3 border-l-2 border-[#C9A84C] pl-4">
+                <p className="text-white text-sm font-bold uppercase tracking-wider">
+                  3:00 – 5:00 PM
+                </p>
+                <span className="text-gray-600 text-xs">·</span>
+                <p className="text-gray-400 text-xs uppercase tracking-wider">
+                  Seamless for parents
+                </p>
+              </div>
+            </div>
+
+            {/* Right: included items grid */}
+            <div className="flex-1 grid grid-cols-1 sm:grid-cols-2 gap-px bg-white/10 w-full">
+              {[
+                {
+                  title: "School Pickup",
+                  desc: "Direct pickup from your child's participating school at the end of the day.",
+                },
+                {
+                  title: "Transportation",
+                  desc: "Safe, supervised transit from school to the training facility.",
+                },
+                {
+                  title: "1.5 Hours of Instruction",
+                  desc: "Structured, sport-specific development — not free play.",
+                },
+                {
+                  title: "Elite Coaching",
+                  desc: "Qualified coaches from established partner organizations.",
+                },
+                {
+                  title: "Premium Facilities",
+                  desc: "Train at the same venues used by top local programs.",
+                },
+                {
+                  title: "Seamless 3 – 5 PM Solution",
+                  desc: "A complete after-school program that fits a working family's schedule.",
+                },
+              ].map((item) => (
+                <div key={item.title} className="bg-[#161616] px-7 py-7">
+                  <div className="w-5 h-[2px] bg-[#C9A84C] mb-4" />
+                  <p className="text-white text-sm font-bold uppercase tracking-wide mb-2">
+                    {item.title}
+                  </p>
+                  <p className="text-gray-500 text-xs leading-relaxed">
+                    {item.desc}
+                  </p>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
@@ -145,11 +223,8 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto">
           {/* Mobile: just heading + CTA button */}
           <div className="sm:hidden text-center">
-            <p className="text-[#C9A84C] text-xs font-bold uppercase tracking-[0.3em] mb-3">
-              Our Programs
-            </p>
             <h2 className="font-black text-4xl uppercase text-white leading-tight mb-8">
-              Choose Your<br />Discipline
+              Choose Your<br />Programs
             </h2>
             <Link
               href="/sports"
@@ -163,11 +238,8 @@ export default function HomePage() {
           <div className="hidden sm:block">
             <div className="flex items-end justify-between mb-12 flex-wrap gap-4">
               <div>
-                <p className="text-[#C9A84C] text-xs font-bold uppercase tracking-[0.3em] mb-3">
-                  Our Programs
-                </p>
                 <h2 className="font-black text-4xl sm:text-5xl uppercase text-white leading-tight">
-                  Choose Your<br />Discipline
+                  Choose Your<br />Programs
                 </h2>
               </div>
               <Link
@@ -221,7 +293,7 @@ export default function HomePage() {
                       <p className="text-gray-400 text-xs font-medium mt-1">{sport.partner}</p>
                     )}
                     <p className="text-[#C9A84C] text-xs font-bold uppercase tracking-widest mt-3 opacity-0 group-hover:opacity-100 transition-opacity">
-                      Register →
+                      Join Waitlist →
                     </p>
                   </div>
                 </Link>
@@ -252,12 +324,12 @@ export default function HomePage() {
           </div>
           <div className="flex flex-col sm:flex-row gap-3 flex-shrink-0">
             <Link
-              href="https://go.teamsnap.com/forms/518037"
+              href={registration_url}
               target="_blank"
               rel="noopener noreferrer"
               className="bg-white text-[#C8102E] font-black text-sm uppercase tracking-widest px-8 py-4 hover:bg-black hover:text-white transition-colors text-center"
             >
-              Register on TeamSnap
+              Join the Waitlist
             </Link>
             <ContactModal
               label="Contact Us"
@@ -399,10 +471,10 @@ export default function HomePage() {
                 <p className="text-gray-500 text-xs leading-relaxed">
                   Need documentation for your tax return? Contact us at{" "}
                   <a
-                    href="mailto:info@saeacademynl.com"
+                    href={`mailto:${contact_email}`}
                     className="text-[#C9A84C] hover:text-yellow-400 transition-colors"
                   >
-                    info@saeacademynl.com
+                    {contact_email}
                   </a>{" "}
                   and we&apos;ll provide the receipts you need.
                 </p>

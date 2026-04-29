@@ -10,7 +10,13 @@ export const faqs: FaqItem[] = [
     category: "General",
     question: "What is the Sports, Arts, Education Academy?",
     answer:
-      "Sports, Arts, Education Academy (SAE Academy) is an elite afterschool program that combines weekly athletic or artistic training with qualified coaching. We partner with established local sports organizations to give athletes and artists the time, facilities, and coaching they need to develop at a high level.",
+      "Sports, Arts, Education Academy (SAE Academy) is an Elite After-School Development Program that combines structured weekly development in sport or art with qualified coaching. We partner with established local sports organizations to give athletes and artists the time, facilities, and coaching they need to develop at a high level.",
+  },
+  {
+    category: "General",
+    question: "What's included in the $62.50/day program fee?",
+    answer:
+      "The daily fee covers a complete, end-to-end after-school solution — far more than just a practice. Each day includes:\n\n• School pickup at the end of the school day\n• Safe, supervised transportation to the training facility\n• 1.5 hours of structured, sport-specific instruction\n• Elite coaching from qualified partner organizations\n• Access to premium training facilities\n• A seamless 3:00–5:00 PM solution for working families\n\nYou're investing in your athlete's development and your family's weekday routine at the same time.",
   },
   {
     category: "General",
@@ -39,9 +45,9 @@ export const faqs: FaqItem[] = [
   // Registration
   {
     category: "Registration",
-    question: "How do I register?",
+    question: "How do I join the waitlist?",
     answer:
-      "Registration is handled through TeamSnap. You can find the registration link on each individual sport page. Click 'Register Now' on the sport of your choice and complete the form online.",
+      "Spots are filled on a first-come, first-served basis through our waitlist. You can join from any sport page or from the navigation bar — click 'Join the Waitlist' on the program of your choice and complete the short form. Once a seat opens up, we'll be in touch to confirm your spot.",
   },
   {
     category: "Registration",
@@ -56,6 +62,12 @@ export const faqs: FaqItem[] = [
       "For any questions about the program, registration, or eligibility, please email us at info@academiesae.com. We aim to respond within 1–2 business days.",
   },
   // Tax & Finances
+  {
+    category: "Tax & Finances",
+    question: "Why is SAE Academy priced at $62.50/day?",
+    answer:
+      "The $62.50 daily rate reflects the true cost of delivering an Elite After-School Development Program — not just a practice. Here's where the value goes:\n\n• Transportation is the single largest cost. We operate safe, supervised transit from your child's school to the training facility every program day.\n• School pickup is included. Your child is collected directly from their participating school at the end of the school day.\n• 1.5 hours of structured, sport-specific instruction is included — not free play or supervised time.\n• Top coaches and premium facilities are included. We partner with established sports organizations and train at the same venues used by leading local programs.\n• It's a flexible add-on, not full-time childcare. Parents pay only for the days their child is enrolled — there's no full-day daycare overhead built into the price.\n• Eligible tax incentives may reduce the total cost. Many families qualify for the NL Physical Activity Tax Credit (up to $2,000/family/year) and federal child-care expense deductions, lowering the real out-of-pocket cost significantly.\n\nWhen you compare to the cost of separate transportation, private coaching, and facility access, the daily rate delivers all of it in one seamless 3:00–5:00 PM solution.",
+  },
   {
     category: "Tax & Finances",
     question: "Is there a provincial tax credit for registering in the program?",
