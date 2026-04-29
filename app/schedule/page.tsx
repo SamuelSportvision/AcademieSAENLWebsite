@@ -77,7 +77,7 @@ export default async function SchedulePage() {
             </p>
           </div>
           <a
-            href="https://go.teamsnap.com/forms/518037"
+            href="https://mailchi.mp/saeacademynl/email-sign-up"
             target="_blank"
             rel="noopener noreferrer"
             className="bg-[#C9A84C] text-black font-black text-sm uppercase tracking-widest px-8 py-4 hover:bg-yellow-400 transition-colors whitespace-nowrap"

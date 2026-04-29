@@ -40,7 +40,9 @@ export interface SiteSettings {
 
 export const DEFAULT_SITE_SETTINGS: SiteSettings = {
   contact_email: "info@saeacademynl.com",
-  registration_url: "https://go.teamsnap.com/forms/518037",
+  // While the program is in waitlist mode, the "Join the Waitlist" CTAs
+  // intentionally point at the Mailchimp signup, not TeamSnap.
+  registration_url: "https://mailchi.mp/saeacademynl/email-sign-up",
   mailing_list_url: "https://mailchi.mp/saeacademynl/email-sign-up",
   mailing_list_eyebrow: "Stay in the loop",
   mailing_list_heading: "Join our mailing list",
@@ -58,7 +60,7 @@ export const DEFAULT_SITE_SETTINGS: SiteSettings = {
     cta_primary: { label: "Explore Programs", href: "/sports" },
     cta_secondary: {
       label: "Join the Waitlist",
-      href: "https://go.teamsnap.com/forms/518037",
+      href: "https://mailchi.mp/saeacademynl/email-sign-up",
     },
   },
   home_stats: [

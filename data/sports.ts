@@ -11,7 +11,9 @@ export interface Sport {
   image: string | null;
 }
 
-const TEAMSNAP_URL = "https://go.teamsnap.com/forms/518037";
+// Temporary: while the program is in waitlist mode, all "Join the Waitlist"
+// CTAs point at the Mailchimp signup instead of the TeamSnap registration form.
+const WAITLIST_URL = "https://mailchi.mp/saeacademynl/email-sign-up";
 
 export const sports: Sport[] = [
   {
@@ -19,7 +21,7 @@ export const sports: Sport[] = [
     name: "Hockey",
     partner: "Xtreme Hockey",
     partnerUrl: null,
-    registrationUrl: TEAMSNAP_URL,
+    registrationUrl: WAITLIST_URL,
     tagline: "Train Weekly.",
     description:
       "Our Hockey program gives athletes the ice time and coaching they need to develop at an elite level.",
@@ -36,7 +38,7 @@ export const sports: Sport[] = [
     name: "Cheerleading",
     partner: "Cheer Sport Sharks",
     partnerUrl: null,
-    registrationUrl: TEAMSNAP_URL,
+    registrationUrl: WAITLIST_URL,
     tagline: "Strength, precision, and teamwork every day.",
     description:
       "Our Cheerleading program combines athleticism, artistry, and teamwork. Athletes train weekly with qualified coaches in a supportive environment that nurtures both sport performance and personal growth.",
@@ -53,7 +55,7 @@ export const sports: Sport[] = [
     name: "Volleyball",
     partner: "The Court House",
     partnerUrl: null,
-    registrationUrl: TEAMSNAP_URL,
+    registrationUrl: WAITLIST_URL,
     tagline: "Elevate your game on and off the court.",
     description:
       "Partnered with The Court House, our Volleyball program gives dedicated athletes 1.5 hours of elite court development each week with expert coaching.",
@@ -70,7 +72,7 @@ export const sports: Sport[] = [
     name: "Baseball",
     partner: "Premier Sports Academy",
     partnerUrl: null,
-    registrationUrl: TEAMSNAP_URL,
+    registrationUrl: WAITLIST_URL,
     tagline: "Develop the fundamentals. Excel at every level.",
     description:
       "In partnership with Premier Sports Academy, our Baseball program delivers structured weekly development for players who want to take their game to the next level.",
@@ -87,7 +89,7 @@ export const sports: Sport[] = [
     name: "Basketball",
     partner: "CE23 Basketball",
     partnerUrl: null,
-    registrationUrl: TEAMSNAP_URL,
+    registrationUrl: WAITLIST_URL,
     tagline: "Play every day. Grow every game.",
     description:
       "Our Basketball program, developed in partnership with CE23 Basketball, delivers structured weekly development focused on skill, team play, and athletic growth.",
@@ -104,7 +106,7 @@ export const sports: Sport[] = [
     name: "Boxing",
     partner: "NL Boxing",
     partnerUrl: null,
-    registrationUrl: TEAMSNAP_URL,
+    registrationUrl: WAITLIST_URL,
     tagline: "Discipline, focus, and dedication — every day.",
     description:
       "Our Boxing program develops discipline, mental toughness, and physical conditioning in a safe and structured environment. Athletes get 1.5 hours of elite training each week under qualified coaches.",
@@ -121,7 +123,7 @@ export const sports: Sport[] = [
     name: "Dance",
     partner: "The Dance Academy",
     partnerUrl: null,
-    registrationUrl: TEAMSNAP_URL,
+    registrationUrl: WAITLIST_URL,
     tagline: "Express yourself. Train like a professional.",
     description:
       "Partnered with The Dance Academy, our Dance program gives aspiring dancers 1.5 hours of elite training each week in a professional environment.",
@@ -138,7 +140,7 @@ export const sports: Sport[] = [
     name: "Soccer",
     partner: "Pro Touch Academy",
     partnerUrl: null,
-    registrationUrl: TEAMSNAP_URL,
+    registrationUrl: WAITLIST_URL,
     tagline: "Train harder. Play smarter.",
     description:
       "Our Soccer program delivers structured weekly development focused on technical skill, tactical understanding, and physical conditioning.",

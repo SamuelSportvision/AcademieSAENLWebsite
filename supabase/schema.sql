@@ -383,7 +383,10 @@ CREATE TRIGGER site_settings_updated_at
 -- has touched anything. Re-running is safe (ON CONFLICT DO NOTHING).
 INSERT INTO site_settings (key, value) VALUES
   ('contact_email',           '"info@saeacademynl.com"'),
-  ('registration_url',        '"https://go.teamsnap.com/forms/518037"'),
+  -- While the program is in waitlist mode, registration_url points at the
+  -- Mailchimp signup so the "Join the Waitlist" CTAs all funnel into the
+  -- mailing list. Flip this back to the TeamSnap form when registration opens.
+  ('registration_url',        '"https://mailchi.mp/saeacademynl/email-sign-up"'),
   ('mailing_list_url',        '"https://mailchi.mp/saeacademynl/email-sign-up"'),
   ('mailing_list_eyebrow',    '"Stay in the loop"'),
   ('mailing_list_heading',    '"Join our mailing list"'),
@@ -393,7 +396,7 @@ INSERT INTO site_settings (key, value) VALUES
     "title_lines": ["Elite After-School", "Development", "For Athletes Who Want More."],
     "subtitle": "A premium 3:00–5:00 PM solution for families. School pickup, transportation, 1.5 hours of structured instruction, and elite coaching — all in one program.",
     "cta_primary":   { "label": "Explore Programs",  "href": "/sports" },
-    "cta_secondary": { "label": "Join the Waitlist", "href": "https://go.teamsnap.com/forms/518037" }
+    "cta_secondary": { "label": "Join the Waitlist", "href": "https://mailchi.mp/saeacademynl/email-sign-up" }
   }'),
   ('home_stats', '[
     { "value": "8",    "label": "Disciplines" },
