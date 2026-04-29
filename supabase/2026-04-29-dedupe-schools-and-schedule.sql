@@ -11,11 +11,20 @@
 
 BEGIN;
 
--- ── 1. Schools: keep the oldest row per name, drop the rest ─────────────────
-DELETE FROM schools a
-USING  schools b
-WHERE  a.name = b.name
-  AND  (a.created_at, a.id) > (b.created_at, b.id);
+-- ── 1. Schools: keep the first row per name, drop the rest ──────────────────
+-- Uses ROW_NUMBER so every group keeps exactly one row, even when several
+-- rows share the same created_at (which happens when the seed inserted them
+-- all in one batch).
+WITH ranked AS (
+  SELECT id,
+         ROW_NUMBER() OVER (
+           PARTITION BY name
+           ORDER BY     created_at, id
+         ) AS rn
+  FROM   schools
+)
+DELETE FROM schools
+WHERE  id IN (SELECT id FROM ranked WHERE rn > 1);
 
 -- Now that names are unique, enforce it at the schema level.
 ALTER TABLE schools
@@ -23,15 +32,18 @@ ALTER TABLE schools
 ALTER TABLE schools
   ADD  CONSTRAINT schools_name_key UNIQUE (name);
 
--- ── 2. Schedule events: keep the oldest row per natural slot ────────────────
+-- ── 2. Schedule events: keep the first row per natural slot ─────────────────
 -- A "slot" is the same sport, same day, same start time, same location.
-DELETE FROM schedule_events a
-USING  schedule_events b
-WHERE  a.day        = b.day
-  AND  a.sport_slug = b.sport_slug
-  AND  a.start_time = b.start_time
-  AND  COALESCE(a.location, '') = COALESCE(b.location, '')
-  AND  (a.created_at, a.id) > (b.created_at, b.id);
+WITH ranked AS (
+  SELECT id,
+         ROW_NUMBER() OVER (
+           PARTITION BY day, sport_slug, start_time, COALESCE(location, '')
+           ORDER BY     created_at, id
+         ) AS rn
+  FROM   schedule_events
+)
+DELETE FROM schedule_events
+WHERE  id IN (SELECT id FROM ranked WHERE rn > 1);
 
 DROP INDEX IF EXISTS schedule_events_unique_slot;
 CREATE UNIQUE INDEX schedule_events_unique_slot
