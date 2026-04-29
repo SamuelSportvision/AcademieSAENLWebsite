@@ -54,8 +54,33 @@ export default async function SportDetailPage({ params }: Props) {
   // Fall back to static content when no CMS sections exist yet.
   const hasCmsSections = sections.length > 0;
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Course",
+    name: `${sport.name} — SAE Academy`,
+    description: sport.description,
+    url: `https://www.saeacademynl.com/sports/${sport.slug}`,
+    provider: {
+      "@type": "SportsOrganization",
+      name: "SAE Academy",
+      url: "https://www.saeacademynl.com",
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: "St. John's",
+        addressRegion: "NL",
+        addressCountry: "CA",
+      },
+    },
+    ...(sport.partner ? { teaches: sport.partner } : {}),
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+
       {/* Hero */}
       <section className="relative min-h-[520px] flex items-end overflow-hidden">
         {sport.image ? (

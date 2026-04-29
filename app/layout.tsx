@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Exo_2 } from "next/font/google";
+import { GoogleAnalytics } from "@next/third-parties/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -16,18 +17,25 @@ const exo2 = Exo_2({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://academiesae.com"),
+  metadataBase: new URL("https://www.saeacademynl.com"),
   title: "Sports, Arts, Education Academy",
   description:
-    "An Elite After-School Development Program in New Brunswick providing qualified coaches and structured weekly development for athletes and artists.",
+    "An Elite After-School Development Program in St. John's, Newfoundland providing qualified coaches and structured weekly development for athletes and artists.",
   icons: {
     icon: "/logo-transparent.png",
     apple: "/logo-transparent.png",
   },
   openGraph: {
-    title: "Sports, Arts, Education Academy",
+    title: "Sports, Arts, Education Academy — St. John's, NL",
     description:
-      "An Elite After-School Development Program in New Brunswick providing qualified coaches and structured weekly development for athletes and artists.",
+      "An Elite After-School Development Program in St. John's, Newfoundland providing qualified coaches and structured weekly development for athletes and artists.",
+    images: ["/logo-dark.png"],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Sports, Arts, Education Academy — St. John's, NL",
+    description:
+      "An Elite After-School Development Program in St. John's, Newfoundland providing qualified coaches and structured weekly development for athletes and artists.",
     images: ["/logo-dark.png"],
   },
 };
@@ -46,6 +54,7 @@ export default async function RootLayout({
         <main className="flex-1">{children}</main>
         <Footer settings={settings} />
       </body>
+      <GoogleAnalytics gaId="G-DQ5Y6C106F" />
     </html>
   );
 }

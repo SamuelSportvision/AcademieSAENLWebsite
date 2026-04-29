@@ -9,7 +9,7 @@ export const dynamic = "force-dynamic";
 export const metadata: Metadata = {
   title: "Participating Schools | SAE Academy",
   description:
-    "See the list of partner schools in the SAE Academy Sports Studies program in New Brunswick.",
+    "See the list of partner schools in the SAE Academy Sports Studies program in St. John's, Newfoundland.",
 };
 
 async function getSchools(): Promise<School[]> {

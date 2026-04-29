@@ -8,7 +8,7 @@ export const dynamic = "force-dynamic";
 export const metadata: Metadata = {
   title: "FAQ | SAE Academy",
   description:
-    "Frequently asked questions about the SAE Academy program, registration, and available tax credits for families in New Brunswick.",
+    "Frequently asked questions about the SAE Academy program, registration, and available tax credits for families in St. John's, Newfoundland.",
 };
 
 const CATEGORIES = ["General", "Registration", "Tax & Finances"] as const;
@@ -33,8 +33,26 @@ async function getFaqs(): Promise<FaqItem[]> {
 export default async function FaqPage() {
   const faqs = await getFaqs();
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map((faq) => ({
+      "@type": "Question",
+      name: faq.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: faq.answer,
+      },
+    })),
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+
       {/* Page Header */}
       <section className="bg-[#1a1a1a] border-b border-white/10 pt-28 pb-16 px-5">
         <div className="max-w-7xl mx-auto">

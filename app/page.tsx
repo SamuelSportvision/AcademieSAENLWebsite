@@ -14,8 +14,43 @@ export default async function HomePage() {
   const settings = await getSiteSettings();
   const { home_hero: hero, home_stats: stats, contact_email, registration_url } = settings;
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": ["SportsOrganization", "LocalBusiness"],
+    name: "SAE Academy",
+    alternateName: "Sports, Arts, Education Academy",
+    description:
+      "Elite After-School Development Program in St. John's, Newfoundland providing qualified coaches and structured weekly development for athletes and artists.",
+    url: "https://www.saeacademynl.com",
+    email: contact_email,
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: "St. John's",
+      addressRegion: "NL",
+      addressCountry: "CA",
+    },
+    areaServed: "St. John's, Newfoundland",
+    sport: [
+      "Hockey",
+      "Volleyball",
+      "Basketball",
+      "Baseball",
+      "Cheerleading",
+      "Boxing",
+      "Dance",
+      "Soccer",
+    ],
+    logo: "https://www.saeacademynl.com/logo-dark.png",
+    sameAs: [],
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+
       {/* ── HERO ── full-viewport photo background */}
       <section className="relative min-h-[100svh] flex items-end overflow-hidden">
         {/* Background photo */}
