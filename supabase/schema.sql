@@ -14,6 +14,12 @@ CREATE TABLE IF NOT EXISTS schedule_events (
   created_at  TIMESTAMPTZ DEFAULT NOW()
 );
 
+-- Natural key for an event: same sport, same day, same start time, same place.
+-- This makes the seed below truly idempotent and prevents duplicate slots
+-- from being added through the admin form.
+CREATE UNIQUE INDEX IF NOT EXISTS schedule_events_unique_slot
+  ON schedule_events (day, sport_slug, start_time, location);
+
 -- Enable Row Level Security
 ALTER TABLE schedule_events ENABLE ROW LEVEL SECURITY;
 
@@ -62,7 +68,7 @@ INSERT INTO schedule_events (day, sport_slug, sport_name, start_time, end_time, 
   -- Soccer · M T
   ('Monday',    'soccer',       'Soccer',       '15:00', '17:00', 'Pro Touch Academy',      '#22C55E'),
   ('Tuesday',   'soccer',       'Soccer',       '15:00', '17:00', 'Pro Touch Academy',      '#22C55E')
-ON CONFLICT DO NOTHING;
+ON CONFLICT (day, sport_slug, start_time, location) DO NOTHING;
 
 -- ─── FAQ ────────────────────────────────────────────────────────────────────
 
@@ -92,7 +98,7 @@ CREATE POLICY "Authenticated write faqs"
 
 CREATE TABLE IF NOT EXISTS schools (
   id          UUID        DEFAULT gen_random_uuid() PRIMARY KEY,
-  name        TEXT        NOT NULL,
+  name        TEXT        NOT NULL UNIQUE,
   level       TEXT        NOT NULL
                 CHECK (level IN ('Elementary', 'Intermediate', 'Other')),
   sort_order  INTEGER     NOT NULL DEFAULT 0,
@@ -276,7 +282,7 @@ INSERT INTO schools (name, level, sort_order) VALUES
   ('Upper Gullies Elementary',        'Elementary',   0),
   ('Vanier Elementary',               'Elementary',   0),
   ('Villanova Junior High',           'Intermediate', 0)
-ON CONFLICT DO NOTHING;
+ON CONFLICT (name) DO NOTHING;
 
 -- ─── FORMS ───────────────────────────────────────────────────────────────────
 -- General-purpose form builder. Each form is hosted at /forms/[slug].
