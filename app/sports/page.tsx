@@ -7,7 +7,7 @@ import ContactModal from "@/components/ContactModal";
 export const metadata: Metadata = {
   title: "Programs | Sports, Arts, Education Academy",
   description:
-    "Browse all SAE Academy disciplines — Hockey, Volleyball, Basketball, Dance, and more. Structured weekly development with elite coaching.",
+    "Browse all SAE Academy disciplines — Hockey, Volleyball, Dance, and more. Structured weekly development with elite coaching.",
 };
 
 export default function SportsPage() {
@@ -82,7 +82,7 @@ export default function SportsPage() {
                     </p>
                   )}
                   <p className="text-[#C9A84C] text-xs font-bold uppercase tracking-widest group-hover:underline">
-                    Learn More &amp; Join Waitlist →
+                    Learn More →
                   </p>
                 </div>
               </Link>

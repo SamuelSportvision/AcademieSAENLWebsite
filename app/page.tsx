@@ -33,7 +33,6 @@ export default async function HomePage() {
     sport: [
       "Hockey",
       "Volleyball",
-      "Basketball",
       "Baseball",
       "Cheerleading",
       "Boxing",
@@ -69,9 +68,11 @@ export default async function HomePage() {
         <div className="absolute bottom-0 left-0 w-full h-[3px] bg-[#C9A84C] z-20" />
 
         <div className="relative z-10 w-full max-w-7xl mx-auto px-5 pb-16 pt-32">
-          <p className="text-[#C9A84C] text-xs font-bold uppercase tracking-[0.35em] mb-5">
-            {hero.eyebrow}
-          </p>
+          {hero.eyebrow && (
+            <p className="text-[#C9A84C] text-xs font-bold uppercase tracking-[0.35em] mb-5">
+              {hero.eyebrow}
+            </p>
+          )}
           <h1 className="font-black uppercase text-white leading-[0.95] tracking-tight mb-6 max-w-4xl">
             <span className="block text-[clamp(2.25rem,7vw,5.25rem)]">{hero.title_lines[0]}</span>
             <span className="block text-[clamp(2.25rem,7vw,5.25rem)]">{hero.title_lines[1]}</span>
@@ -328,7 +329,7 @@ export default async function HomePage() {
                       <p className="text-gray-400 text-xs font-medium mt-1">{sport.partner}</p>
                     )}
                     <p className="text-[#C9A84C] text-xs font-bold uppercase tracking-widest mt-3 opacity-0 group-hover:opacity-100 transition-opacity">
-                      Join Waitlist →
+                      Join Mailing List →
                     </p>
                   </div>
                 </Link>
@@ -364,7 +365,7 @@ export default async function HomePage() {
               rel="noopener noreferrer"
               className="bg-white text-[#C8102E] font-black text-sm uppercase tracking-widest px-8 py-4 hover:bg-black hover:text-white transition-colors text-center"
             >
-              Join the Waitlist
+              Join Our Mailing List
             </Link>
             <ContactModal
               label="Contact Us"

@@ -40,8 +40,7 @@ export interface SiteSettings {
 
 export const DEFAULT_SITE_SETTINGS: SiteSettings = {
   contact_email: "info@saeacademynl.com",
-  // While the program is in waitlist mode, the "Join the Waitlist" CTAs
-  // intentionally point at the Mailchimp signup, not TeamSnap.
+  // "Join Our Mailing List" CTAs point at the Mailchimp signup.
   registration_url: "https://mailchi.mp/saeacademynl/email-sign-up",
   mailing_list_url: "https://mailchi.mp/saeacademynl/email-sign-up",
   mailing_list_eyebrow: "Stay in the loop",
@@ -49,7 +48,7 @@ export const DEFAULT_SITE_SETTINGS: SiteSettings = {
   mailing_list_subheading:
     "Be among the first to secure a spot in the SAE Academy's Elite After-School Development Program.",
   home_hero: {
-    eyebrow: "Newfoundland Sport Education Program",
+    eyebrow: "",
     title_lines: [
       "Elite After-School",
       "Development",
@@ -59,12 +58,12 @@ export const DEFAULT_SITE_SETTINGS: SiteSettings = {
       "A premium 3:00–5:00 PM solution for families. School pickup, transportation, 1.5 hours of structured instruction, and elite coaching — all in one program.",
     cta_primary: { label: "Explore Programs", href: "/sports" },
     cta_secondary: {
-      label: "Join the Waitlist",
+      label: "Join Our Mailing List",
       href: "https://mailchi.mp/saeacademynl/email-sign-up",
     },
   },
   home_stats: [
-    { value: "8", label: "Disciplines" },
+    { value: "7", label: "Disciplines" },
     { value: "45", label: "Eligible Schools" },
     { value: "1.5h", label: "Daily Development" },
   ],

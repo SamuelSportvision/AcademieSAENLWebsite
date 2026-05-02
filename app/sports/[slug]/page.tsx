@@ -171,7 +171,7 @@ export default async function SportDetailPage({ params }: Props) {
               rel="noopener noreferrer"
               className="bg-[#C8102E] text-white font-black text-sm uppercase tracking-widest px-6 py-5 text-center hover:bg-red-700 transition-colors"
             >
-              Join the Waitlist
+              Join Our Mailing List
             </Link>
             {sport.partnerUrl && (
               <Link

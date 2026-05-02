@@ -11,8 +11,7 @@ export interface Sport {
   image: string | null;
 }
 
-// Temporary: while the program is in waitlist mode, all "Join the Waitlist"
-// CTAs point at the Mailchimp signup instead of the TeamSnap registration form.
+// "Join Our Mailing List" CTAs point at the Mailchimp signup.
 const WAITLIST_URL = "https://mailchi.mp/saeacademynl/email-sign-up";
 
 export const sports: Sport[] = [
@@ -83,23 +82,6 @@ export const sports: Sport[] = [
     ],
     accentColor: "#10B981",
     image: "/images/baseball-team.jpg",
-  },
-  {
-    slug: "basketball",
-    name: "Basketball",
-    partner: "CE23 Basketball",
-    partnerUrl: null,
-    registrationUrl: WAITLIST_URL,
-    tagline: "Play every day. Grow every game.",
-    description:
-      "Our Basketball program, developed in partnership with CE23 Basketball, delivers structured weekly development focused on skill, team play, and athletic growth.",
-    highlights: [
-      "1.5 hours of elite skill development each week",
-      "Partner program: CE23 Basketball",
-      "Individual and team-based coaching",
-    ],
-    accentColor: "#F97316",
-    image: "/images/basketball.jpg",
   },
   {
     slug: "boxing",

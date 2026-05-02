@@ -22,7 +22,7 @@ export const faqs: FaqItem[] = [
     category: "General",
     question: "What sports and disciplines are available?",
     answer:
-      "We currently offer programming in Hockey, Cheerleading, Volleyball, Baseball, Basketball, Boxing, Dance, and Soccer. Each discipline is supported by a partner organization and qualified coaches.",
+      "We currently offer programming in Hockey, Cheerleading, Volleyball, Baseball, Boxing, Dance, and Soccer. Each discipline is supported by a partner organization and qualified coaches.",
   },
   {
     category: "General",
@@ -45,9 +45,9 @@ export const faqs: FaqItem[] = [
   // Registration
   {
     category: "Registration",
-    question: "How do I join the waitlist?",
+    question: "How do I join the mailing list?",
     answer:
-      "Spots are filled on a first-come, first-served basis through our waitlist. You can join from any sport page or from the navigation bar — click 'Join the Waitlist' on the program of your choice and complete the short form. Once a seat opens up, we'll be in touch to confirm your spot.",
+      "You can join our mailing list from any sport page or from the navigation bar — click 'Join Our Mailing List' and complete the short form. You'll be among the first to hear about program updates and availability.",
   },
   {
     category: "Registration",
@@ -59,7 +59,7 @@ export const faqs: FaqItem[] = [
     category: "Registration",
     question: "Who should I contact for general inquiries?",
     answer:
-      "For any questions about the program, registration, or eligibility, please email us at info@academiesae.com. We aim to respond within 1–2 business days.",
+      "For any questions about the program, registration, or eligibility, please email us at info@saeacademynl.com. We aim to respond within 1–2 business days.",
   },
   // Tax & Finances
   {
@@ -84,6 +84,6 @@ export const faqs: FaqItem[] = [
     category: "Tax & Finances",
     question: "Can I get a receipt for tax purposes?",
     answer:
-      "Yes. If you require a receipt for tax purposes, please contact us at info@academiesae.com with your name and registration details and we will provide the documentation you need.",
+      "Yes. If you require a receipt for tax purposes, please contact us at info@saeacademynl.com with your name and registration details and we will provide the documentation you need.",
   },
 ];
