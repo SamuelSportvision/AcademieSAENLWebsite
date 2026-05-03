@@ -68,11 +68,6 @@ export default async function HomePage() {
         <div className="absolute bottom-0 left-0 w-full h-[3px] bg-[#C9A84C] z-20" />
 
         <div className="relative z-10 w-full max-w-7xl mx-auto px-5 pb-16 pt-32">
-          {hero.eyebrow && (
-            <p className="text-[#C9A84C] text-xs font-bold uppercase tracking-[0.35em] mb-5">
-              {hero.eyebrow}
-            </p>
-          )}
           <h1 className="font-black uppercase text-white leading-[0.95] tracking-tight mb-6 max-w-4xl">
             <span className="block text-[clamp(2.25rem,7vw,5.25rem)]">{hero.title_lines[0]}</span>
             <span className="block text-[clamp(2.25rem,7vw,5.25rem)]">{hero.title_lines[1]}</span>
@@ -83,16 +78,9 @@ export default async function HomePage() {
           </p>
           <div className="flex flex-col sm:flex-row gap-3">
             <Link
-              href={hero.cta_primary.href}
-              {...(isExternal(hero.cta_primary.href) ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-              className="bg-[#C8102E] text-white font-black text-sm uppercase tracking-widest px-8 py-4 hover:bg-red-700 transition-colors text-center"
-            >
-              {hero.cta_primary.label}
-            </Link>
-            <Link
               href={hero.cta_secondary.href}
               {...(isExternal(hero.cta_secondary.href) ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-              className="border-2 border-white text-white font-black text-sm uppercase tracking-widest px-8 py-4 hover:bg-white hover:text-black transition-colors text-center"
+              className="bg-[#C8102E] text-white font-black text-sm uppercase tracking-widest px-8 py-4 hover:bg-red-700 transition-colors text-center"
             >
               {hero.cta_secondary.label}
             </Link>
