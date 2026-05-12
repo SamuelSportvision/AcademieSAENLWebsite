@@ -40,8 +40,7 @@ export interface SiteSettings {
 
 export const DEFAULT_SITE_SETTINGS: SiteSettings = {
   contact_email: "info@saeacademynl.com",
-  // "Join Our Mailing List" CTAs point at the Mailchimp signup.
-  registration_url: "https://mailchi.mp/saeacademynl/email-sign-up",
+  registration_url: "https://go.teamsnap.com/forms/518037",
   mailing_list_url: "https://mailchi.mp/saeacademynl/email-sign-up",
   mailing_list_eyebrow: "Stay in the loop",
   mailing_list_heading: "Join our mailing list",

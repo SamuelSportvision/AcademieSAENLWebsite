@@ -96,7 +96,7 @@ export default function Navbar({ registrationUrl }: NavbarProps) {
             rel="noopener noreferrer"
             className="hidden md:inline-block bg-[#C9A84C] text-black font-black text-xs uppercase tracking-widest px-5 py-2.5 rounded-full hover:bg-yellow-400 transition-colors whitespace-nowrap"
           >
-            Join Our Mailing List
+            Register Now!
           </Link>
 
           {/* Mobile hamburger */}
@@ -151,7 +151,7 @@ export default function Navbar({ registrationUrl }: NavbarProps) {
               onClick={() => setOpen(false)}
               className="mt-8 bg-[#C9A84C] text-black text-center font-black uppercase tracking-wider px-4 py-4 text-sm rounded-full"
             >
-              Join Our Mailing List
+              Register Now!
             </Link>
           </nav>
         </div>
