@@ -8,6 +8,20 @@ import SportSections from "@/components/SportSections";
 import type { SportSection } from "@/components/SportSections";
 import { createAdminClient } from "@/lib/supabase/server";
 
+async function fetchRegistrationUrl(slug: string, fallback: string): Promise<string> {
+  try {
+    const admin = createAdminClient();
+    const { data } = await admin
+      .from("sport_config")
+      .select("registration_url")
+      .eq("slug", slug)
+      .maybeSingle();
+    return data?.registration_url?.trim() || fallback;
+  } catch {
+    return fallback;
+  }
+}
+
 // Always fetch fresh so CMS edits appear immediately.
 export const dynamic = "force-dynamic";
 
@@ -49,7 +63,10 @@ export default async function SportDetailPage({ params }: Props) {
   if (!sport) notFound();
 
   const index = sports.findIndex((s) => s.slug === slug);
-  const sections = await fetchSections(slug);
+  const [sections, registrationUrl] = await Promise.all([
+    fetchSections(slug),
+    fetchRegistrationUrl(slug, sport.registrationUrl),
+  ]);
 
   // Fall back to static content when no CMS sections exist yet.
   const hasCmsSections = sections.length > 0;
@@ -166,12 +183,12 @@ export default async function SportDetailPage({ params }: Props) {
               Save Your Spot
             </p>
             <Link
-              href={sport.registrationUrl}
+              href={registrationUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="bg-[#C8102E] text-white font-black text-sm uppercase tracking-widest px-6 py-5 text-center hover:bg-red-700 transition-colors"
             >
-              Join Our Mailing List
+              Register Now
             </Link>
             {sport.partnerUrl && (
               <Link

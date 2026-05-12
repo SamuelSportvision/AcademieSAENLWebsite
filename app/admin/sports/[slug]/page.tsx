@@ -7,6 +7,84 @@ import { getSportBySlug } from "@/data/sports";
 import type { SportSection, SectionType } from "@/components/SportSections";
 import SectionDrawer from "@/components/admin/SectionDrawer";
 
+/* ─── Registration URL editor ────────────────────────────────────────────────── */
+
+function RegistrationUrlEditor({ slug, defaultUrl }: { slug: string; defaultUrl: string }) {
+  const [url, setUrl]         = useState<string>("");
+  const [saved, setSaved]     = useState<string>("");
+  const [loading, setLoading] = useState(true);
+  const [saving, setSaving]   = useState(false);
+  const [status, setStatus]   = useState<"idle" | "saved" | "error">("idle");
+
+  useEffect(() => {
+    fetch(`/api/sports/${slug}/config`)
+      .then((r) => r.json())
+      .then((data) => {
+        const v = data?.registration_url ?? defaultUrl;
+        setUrl(v);
+        setSaved(v);
+      })
+      .catch(() => { setUrl(defaultUrl); setSaved(defaultUrl); })
+      .finally(() => setLoading(false));
+  }, [slug, defaultUrl]);
+
+  async function handleSave() {
+    setSaving(true);
+    setStatus("idle");
+    try {
+      const res = await fetch(`/api/sports/${slug}/config`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ registration_url: url }),
+      });
+      if (!res.ok) throw new Error();
+      setSaved(url);
+      setStatus("saved");
+      setTimeout(() => setStatus("idle"), 2500);
+    } catch {
+      setStatus("error");
+    } finally {
+      setSaving(false);
+    }
+  }
+
+  const dirty = url !== saved;
+
+  return (
+    <div className="px-4 pt-4 pb-3 border-b border-white/10 bg-[#111111]">
+      <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#C9A84C] mb-2">
+        Registration Button URL
+      </p>
+      {loading ? (
+        <p className="text-gray-600 text-xs">Loading…</p>
+      ) : (
+        <div className="flex items-center gap-2">
+          <input
+            type="url"
+            value={url}
+            onChange={(e) => setUrl(e.target.value)}
+            placeholder="https://…"
+            className="flex-1 bg-[#1a1a1a] border border-white/10 focus:border-[#C9A84C]/50 text-white text-xs px-3 py-2 rounded outline-none placeholder-gray-600 transition-colors min-w-0"
+          />
+          <button
+            onClick={handleSave}
+            disabled={saving || !dirty}
+            className="shrink-0 bg-[#C9A84C] text-black font-black text-[10px] uppercase tracking-widest px-4 py-2 rounded hover:bg-yellow-400 transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+          >
+            {saving ? "Saving…" : "Save"}
+          </button>
+        </div>
+      )}
+      {status === "saved" && (
+        <p className="text-emerald-400 text-[10px] mt-1.5">Saved — public page will update on next load.</p>
+      )}
+      {status === "error" && (
+        <p className="text-red-400 text-[10px] mt-1.5">Failed to save. Try again.</p>
+      )}
+    </div>
+  );
+}
+
 /* ─── Constants ──────────────────────────────────────────────────────────────── */
 
 const TYPE_LABELS: Record<SectionType, string> = {
@@ -237,6 +315,7 @@ export default function AdminSportBuilderPage({
 
         {/* ── Left panel: section list ── */}
         <div className="w-full lg:w-[380px] flex-shrink-0 flex flex-col overflow-y-auto bg-[#0f0f0f] border-r border-white/10">
+          <RegistrationUrlEditor slug={slug} defaultUrl={sport.registrationUrl} />
           <div className="flex-1 p-4">
             {loading ? (
               <p className="text-gray-600 text-xs uppercase tracking-wider py-12 text-center">Loading…</p>
